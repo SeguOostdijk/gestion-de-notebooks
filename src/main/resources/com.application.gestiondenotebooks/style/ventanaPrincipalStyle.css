@@ -1,0 +1,83 @@
+/* ===== Base / tipografía / fondo ===== */
+.root {
+  -fx-font-family: "Inter", "Segoe UI", "Roboto", system-ui, sans-serif;
+  -fx-font-size: 13.5px;
+  -fx-text-fill: #0f172a;
+  -fx-background-color: #f6f7f9;
+}
+
+/* ===== Cabecera ===== */
+#labelPrincipal {
+  -fx-font-size: 28px;
+  -fx-font-weight: 800;
+  -fx-text-fill: #0f172a;
+}
+#labelSubtitulo {
+  -fx-text-fill: #64748b;
+  -fx-font-size: 14px;
+}
+
+/* ===== Tarjetas (estadísticas pequeñas) ===== */
+#ntbPane, #cgdPane, #mousePane {
+  -fx-background-color: white;
+  -fx-background-radius: 14;
+  -fx-border-color: rgba(2,6,23,0.12);
+  /* el XML trae un border-radius: 10 en inline style; si podés,
+     quítalo del FXML para que se note más el 14 aquí */
+  -fx-border-radius: 14;
+  -fx-padding: 14;
+  -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.06), 16, 0.25, 0, 4);
+}
+
+/* Etiquetas internas de las tarjetas pequeñas */
+#ntbPane .label, #cgdPane .label, #mousePane .label {
+  -fx-text-fill: #374151;;
+}
+
+/* ===== Tarjetas de acciones (grandes) ===== */
+#nuevoPrestPane, #prestActPane, #regHPane {
+  -fx-background-color: white;
+  -fx-background-radius: 14;
+  -fx-border-color: rgba(2,6,23,0.12);
+  -fx-border-radius: 14;
+  -fx-padding: 16;
+  -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.06), 16, 0.25, 0, 4);
+  -fx-cursor: hand;
+}
+#nuevoPrestPane:hover, #prestActPane:hover, #regHPane:hover {
+  -fx-border-color: rgba(2,6,23,0.22);
+  -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.12), 18, 0.35, 0, 6);
+}
+
+/* Títulos y textos dentro de esas tarjetas */
+#labelNuevoPrestamo, #labelPrestamosActivos, #labelRegH {
+  -fx-text-fill: #0f172a;
+  -fx-font-size: 16px;
+  -fx-font-weight: 800;
+}
+#labelParrNuevoPrest, #labelParrPrestAct, #labelParrRegH {
+  -fx-text-fill: #6b7280;
+}
+
+/* ===== Panel de instrucciones ===== */
+#instruccionesPane {
+  -fx-background-color: white;
+  -fx-background-radius: 14;
+  -fx-border-color: rgba(2,6,23,0.12);
+  -fx-border-radius: 14;
+  -fx-padding: 16;
+  -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.06), 16, 0.25, 0, 4);
+}
+#labelnstrucciones {
+  -fx-text-fill: #0f172a;
+  -fx-font-weight: 800;
+}
+#instruccionesPane .label {
+  -fx-text-fill: #374151; /* párrafos */
+}
+
+/* ===== Botones invisibles que usás como overlay (dejamos el cursor “mano”) ===== */
+#nuevoPrestPane Button, #prestActPane Button, #regHPane Button {
+  -fx-background-color: transparent;
+  -fx-cursor: hand;
+}
