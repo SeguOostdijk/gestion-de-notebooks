@@ -1,0 +1,93 @@
+/* ===== Base ===== */
+.root {
+  -fx-font-family: "Inter", "Segoe UI", "Roboto", system-ui, sans-serif;
+  -fx-font-size: 13.5px;
+  -fx-text-fill: #0f172a;
+  -fx-background-color: #f6f7f9;
+}
+
+/* ===== Tarjeta principal =====
+   (si podés, quitá el style inline del FXML para que estos valores apliquen 1:1) */
+#principalPaneNP {
+  -fx-background-color: white;
+  -fx-background-radius: 14;
+  -fx-border-color: rgba(2,6,23,0.12);
+  -fx-border-radius: 14;
+  -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.06), 16, 0.25, 0, 4);
+}
+
+/* ===== Títulos y textos ===== */
+#labelNP {
+  -fx-font-size: 22px;
+  -fx-font-weight: 800;
+  -fx-text-fill: #0f172a;
+}
+#labelSubtitulo {
+  -fx-text-fill: #64748b;
+  -fx-font-size: 13.5px;
+}
+#labelDatosPrestamo {
+  -fx-text-fill: #0f172a;
+  -fx-font-weight: 700;
+}
+#labelNroRef {
+  -fx-font-weight: 700;
+}
+
+/* ===== Inputs (ComboBox) ===== */
+.combo-box {
+  -fx-background-color: #ffffff;
+  -fx-background-radius: 12;
+  -fx-border-color: rgba(2,6,23,0.18);
+  -fx-border-radius: 12;
+  -fx-border-width: 1;
+  -fx-padding: 0; /* quita relleno raro */
+}
+.combo-box:focused {
+  -fx-border-color: #0ea5e9;
+  -fx-effect: dropshadow(gaussian, rgba(14,165,233,0.25), 12, 0.25, 0, 0);
+}
+.combo-box .list-cell {
+  -fx-padding: 8 10;
+  -fx-text-fill: #0f172a;
+}
+.combo-box-popup .list-view {
+  -fx-background-radius: 10;
+  -fx-border-radius: 10;
+}
+
+/* ===== Botones ===== */
+#btnEscaneo {
+  -fx-background-radius: 12;
+  -fx-padding: 10 16;
+  -fx-font-weight: 700;
+  -fx-background-color: #0ea5e9;   /* primario celeste como la home */
+  -fx-text-fill: white;
+  -fx-border-color: transparent;
+}
+#btnEscaneo:hover   { -fx-background-color: #0284c7; }
+#btnEscaneo:pressed { -fx-translate-y: 1; }
+
+#btnCancelar{
+  -fx-background-color: transparent;       /* “ghost” */
+  -fx-text-fill: #0f172a;
+  -fx-border-color: rgba(2,6,23,0.18);
+  -fx-border-width: 1;
+  -fx-border-radius: 12;
+  -fx-background-radius: 12;
+  -fx-padding: 10 16;
+  -fx-font-weight: 600;
+}
+#btnCancelar:hover { -fx-border-color: rgba(2,6,23,0.30); }
+
+/* ===== Botón Volver (si luego le ponés fx:id="btnVolver" en el FXML) ===== */
+#btnVolver {
+  -fx-background-color: transparent;
+  -fx-text-fill: #0f172a;
+  -fx-border-color: rgba(2,6,23,0.18);
+  -fx-border-width: 1;
+  -fx-border-radius: 999;
+  -fx-background-radius: 999;
+  -fx-padding: 6 12;
+}
+#btnVolver:hover { -fx-border-color: rgba(2,6,23,0.30); }
