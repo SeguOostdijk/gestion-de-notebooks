@@ -47,7 +47,7 @@
       </Pane>
    </center>
    <top>
-      <Button fx:id="btnVolver" mnemonicParsing="false" text="Volver" BorderPane.alignment="TOP_LEFT">
+      <Button fx:id="btnVolver" onAction="#volverAlMenuPrincipal" mnemonicParsing="false" text="Volver" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
             <Insets left="50.0" top="30.0" />
          </BorderPane.margin>
