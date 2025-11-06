@@ -2,7 +2,7 @@ package com.application.gestiondenotebooks.controller;
 
 import com.application.gestiondenotebooks.enums.TipoEquipo;
 import com.application.gestiondenotebooks.model.Equipo;
-import com.application.gestiondenotebooks.repository.Repository;
+import com.application.gestiondenotebooks.repository.EquipoRepository;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,9 +16,9 @@ import java.util.ResourceBundle;
 @Component
 public class EscaneoController implements Initializable {
     @Autowired
-    private Repository repository;
+    private EquipoRepository repository;
     private Equipo equipo;
-    private int id;
+    private Long id;
     @FXML
     private ListView<Equipo> listEquipos;
     @FXML

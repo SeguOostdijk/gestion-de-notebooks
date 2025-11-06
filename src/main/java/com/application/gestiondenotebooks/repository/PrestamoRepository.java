@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PrestamoRepository extends JpaRepository<Prestamo, Integer> {
+public interface PrestamoRepository extends JpaRepository<Prestamo, Long> {
     // Devuelve todos los préstamos activos
-    List<Prestamo> findByActivoTrue();
 }
 

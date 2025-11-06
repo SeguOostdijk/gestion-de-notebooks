@@ -1,44 +1,61 @@
 package com.application.gestiondenotebooks.model;
 
+import com.application.gestiondenotebooks.enums.EstadoPrestamo;
+import com.application.gestiondenotebooks.enums.Turno;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "prestamo")
+@Table(
+        name = "prestamo",
+        uniqueConstraints = @UniqueConstraint(name = "uq_prestamo_nro_referencia",columnNames = "numero_referencia")
+)
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Prestamo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "numero_referencia")  // clave primaria
-    private int numeroReferencia;
+    private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String docente;
+    @Column(name = "nro_referencia",nullable = false,length = 50)
+    private String nroReferencia;
 
-    @Column(nullable = false, length = 100)
-    private String materia;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="docente_id", nullable=false,
+            foreignKey = @ForeignKey(name="fk_prestamo_docente"))
+    private Docente docente;
 
-    @Column(nullable = false, length = 50)
-    private String horario;
-
-    @Column(nullable = false, length = 50)
-    private String aula;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "materia_id",nullable = false,
+            foreignKey = @ForeignKey(name = "fk_prestamo_materia"))
+    private Materia materia;
 
     @Column(nullable = false)
-    private boolean activo = true;
+    private LocalDate fecha;
 
-    // Un préstamo puede tener varios equipos asociados
+    @Enumerated(EnumType.STRING)
+    @Column(name = "turno",nullable = false)
+    private Turno turno;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name="aula_id", nullable=false,
+            foreignKey = @ForeignKey(name="fk_prestamo_aula"))
+    private Aula aula;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="estado", nullable=false, length=20)
+    private EstadoPrestamo estado;
+
+   /*
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "num_ref_prestamo") // FK en tabla equipo
     private List<EquipoPrestado> equipos;
@@ -47,7 +64,7 @@ public class Prestamo {
     // Métodos utilitarios
     // ============================
 
-    /** Devuelve un resumen tipo: "3 NOTEBOOKS, 2 MOUSES, 1 CARGADOR" */
+    // Devuelve un resumen tipo: "3 NOTEBOOKS, 2 MOUSES, 1 CARGADOR"
     public String getResumenEquipos() {
         if (equipos == null || equipos.isEmpty()) return "Sin equipos";
         Map<String, Long> conteo = equipos.stream()
@@ -60,10 +77,11 @@ public class Prestamo {
 
     @Override
     public String toString() {
-        return "Ref: " + numeroReferencia +
+        return "Ref: " + nroReferencia +
                 " - " + docente +
                 " (" + materia + ")" +
                 " - " + getResumenEquipos();
     }
+    */
 }
 

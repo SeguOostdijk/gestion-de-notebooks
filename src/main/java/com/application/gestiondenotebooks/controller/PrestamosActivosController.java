@@ -68,22 +68,22 @@ public class PrestamosActivosController implements Initializable {
     }
 
     private void cargarPrestamos() {
-        listPrestamos.setItems(FXCollections.observableArrayList(prestamoRepository.findByActivoTrue()));
+        //listPrestamos.setItems(FXCollections.observableArrayList(prestamoRepository.findByActivoTrue()));
     }
 
     private void mostrarDetallePrestamo(Prestamo p) {
-        lblNroReferencia.setText(String.valueOf(p.getNumeroReferencia()));
-        lblDocente.setText(p.getDocente());
-        lblMateria.setText(p.getMateria());
-        lblHorario.setText(p.getHorario());
-        lblAula.setText(p.getAula());
-        lblEquiposDetalle.setText(p.getResumenEquipos());
+        lblNroReferencia.setText(String.valueOf(p.getNroReferencia()));
+        lblDocente.setText(p.getDocente().getNombre());
+        lblMateria.setText(p.getMateria().getNombre());
+        lblHorario.setText(p.getTurno().name());
+        lblAula.setText(p.getAula().getCodigo_aula());
+       // lblEquiposDetalle.setText(p.getResumenEquipos());
     }
 
     @FXML
     private void finalizarPrestamo() { //Cambiarlo para gestionar devolucion
         if (prestamoSeleccionado != null) {
-            prestamoSeleccionado.setActivo(false);
+            //prestamoSeleccionado.setActivo(false);
             prestamoRepository.save(prestamoSeleccionado);
             cargarPrestamos();
             limpiarDetalle();
