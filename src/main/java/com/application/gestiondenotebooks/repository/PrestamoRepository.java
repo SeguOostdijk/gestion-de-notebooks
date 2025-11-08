@@ -1,5 +1,6 @@
 package com.application.gestiondenotebooks.repository;
 
+import com.application.gestiondenotebooks.enums.EstadoPrestamo;
 import com.application.gestiondenotebooks.model.Prestamo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,10 @@ import java.util.Optional;
 public interface PrestamoRepository extends JpaRepository<Prestamo, Long> {
     @Query("select p.id from Prestamo p where p.nroReferencia = :ref")
     Optional<Long> findIdByNroReferencia(@Param("ref") String nroReferencia);
+
+    EstadoPrestamo estado = EstadoPrestamo.ABIERTO;
+    // Método de consulta derivado para encontrar por el campo 'estado'
+    // Spring genera: SELECT p FROM Prestamo p WHERE p.estado = ?1
+    List<Prestamo> findByEstado(EstadoPrestamo estado);
 }
 

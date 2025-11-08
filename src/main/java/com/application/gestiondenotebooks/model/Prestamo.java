@@ -61,10 +61,9 @@ public class Prestamo {
 
 
 
-   /*
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "num_ref_prestamo") // FK en tabla equipo
-    private List<EquipoPrestado> equipos;
+
+    @OneToMany(mappedBy = "prestamo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<PrestamoEquipo> equipos;
 
     // ============================
     // Métodos utilitarios
@@ -74,7 +73,7 @@ public class Prestamo {
     public String getResumenEquipos() {
         if (equipos == null || equipos.isEmpty()) return "Sin equipos";
         Map<String, Long> conteo = equipos.stream()
-                .collect(Collectors.groupingBy(e -> e.getTipo().name(), Collectors.counting()));
+                .collect(Collectors.groupingBy(e -> String.valueOf(e.getEquipo().getTipo()), Collectors.counting()));
 
         return conteo.entrySet().stream()
                 .map(e -> e.getValue() + " " + e.getKey() + (e.getValue() > 1 ? "S" : ""))
@@ -88,6 +87,5 @@ public class Prestamo {
                 " (" + materia + ")" +
                 " - " + getResumenEquipos();
     }
-    */
 }
 

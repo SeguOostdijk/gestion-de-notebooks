@@ -1,6 +1,8 @@
 package com.application.gestiondenotebooks.controller;
 
+import com.application.gestiondenotebooks.enums.EstadoPrestamo;
 import com.application.gestiondenotebooks.model.Prestamo;
+import com.application.gestiondenotebooks.model.PrestamoEquipo;
 import com.application.gestiondenotebooks.repository.PrestamoRepository;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
@@ -57,6 +60,7 @@ public class PrestamosActivosController implements Initializable {
         listPrestamos.getSelectionModel().selectedItemProperty().addListener((obs, old, nuevo) -> {
             if (nuevo != null) {
                 prestamoSeleccionado = nuevo;
+
                 mostrarDetallePrestamo(nuevo);
                 btnFinalizar.setVisible(true);
                 btnCancelar.setVisible(true);
@@ -68,7 +72,8 @@ public class PrestamosActivosController implements Initializable {
     }
 
     private void cargarPrestamos() {
-        //listPrestamos.setItems(FXCollections.observableArrayList(prestamoRepository.findByActivoTrue()));
+        EstadoPrestamo estado = EstadoPrestamo.ABIERTO;
+        listPrestamos.setItems(FXCollections.observableArrayList(prestamoRepository.findByEstado(estado)));
     }
 
     private void mostrarDetallePrestamo(Prestamo p) {
@@ -77,7 +82,7 @@ public class PrestamosActivosController implements Initializable {
         lblMateria.setText(p.getMateria().getNombre());
         lblHorario.setText(p.getTurno().name());
         lblAula.setText(p.getAula().getCodigo_aula());
-       // lblEquiposDetalle.setText(p.getResumenEquipos());
+        lblEquiposDetalle.setText(p.getResumenEquipos());
     }
 
     @FXML

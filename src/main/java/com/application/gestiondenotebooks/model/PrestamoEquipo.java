@@ -34,4 +34,5 @@ public class PrestamoEquipo {
 
     public PrestamoEquipo(Prestamo referenceById, Equipo equipo, EstadoDevolucion estadoDevolucion) {
     }
+
 }
