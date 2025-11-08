@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:controller="com.application.gestiondenotebooks.controller.NuevoPrestamoController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" stylesheets="@style/nuevoPrestamoStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" stylesheets="@style/nuevoPrestamoStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.gestiondenotebooks.controller.NuevoPrestamoController">
    <center>
       <Pane fx:id="principalPaneNP" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-border-style: solid; -fx-border-radius: 14px;" BorderPane.alignment="CENTER">
          <children>
@@ -21,16 +21,16 @@
             <Label layoutX="35.0" layoutY="100.0" text="Número de Referencia:" />
             <Label fx:id="labelNroRef" layoutX="165.0" layoutY="100.0" />
             <Label layoutX="35.0" layoutY="185.0" text="Datos del docente" />
-            <ComboBox fx:id="cmbDocente" layoutX="32.0" layoutY="211.0" maxHeight="-Infinity" prefHeight="10.0" prefWidth="206.0" />
+            <ComboBox fx:id="cmbDocente" layoutX="32.0" layoutY="211.0" maxHeight="-Infinity" prefHeight="38.0" prefWidth="354.0" />
             <Label layoutX="35.0" layoutY="265.0" text="Datos de la clase" />
             <Label layoutX="35.0" layoutY="302.0" text="Materia" />
-            <ComboBox fx:id="cmbMateria" layoutX="35.0" layoutY="326.0" prefHeight="38.0" prefWidth="208.0" />
+            <ComboBox fx:id="cmbMateria" layoutX="35.0" layoutY="326.0" prefHeight="38.0" prefWidth="354.0" />
             <Label layoutX="35.0" layoutY="375.0" text="Horario" />
             <ComboBox fx:id="cmbHorario" layoutX="35.0" layoutY="398.0" prefHeight="38.0" prefWidth="211.0" />
             <Label layoutX="300.0" layoutY="375.0" text="Aula" />
             <ComboBox fx:id="cmbAula" layoutX="300.0" layoutY="398.0" prefHeight="38.0" prefWidth="188.0" />
-            <Button onAction="#irAEscaneo" fx:id="btnEscaneo" layoutX="152.0" layoutY="494.0" mnemonicParsing="false" text="Continuar a escaneo" />
-            <Button fx:id="btnCancelar" layoutX="375.0" layoutY="494.0" mnemonicParsing="false" text="Cancelar" />
+            <Button fx:id="btnEscaneo" layoutX="152.0" layoutY="494.0" mnemonicParsing="false" onAction="#irAEscaneo" text="Continuar a escaneo" />
+            <Button fx:id="btnLimpiar" onAction="#limpiar" layoutX="375.0" layoutY="494.0" mnemonicParsing="false" text="Limpiar" />
             <Pane fx:id="datosPrestamoPane" layoutX="116.0" layoutY="137.0" prefHeight="33.0" prefWidth="370.0" style="-fx-background-color: white; -fx-border-style: solid; -fx-border-radius: 14px;">
                <children>
                   <Label fx:id="labelDatosPrestamo" layoutX="123.0" layoutY="7.0" text="Datos del préstamo">
@@ -40,6 +40,7 @@
                   </Label>
                </children>
             </Pane>
+            <Label fx:id="labelCampoOblig" layoutX="148.0" layoutY="453.0" text="*Debe completar todos los campos para continuar*" textFill="#cf0d0d" visible="false" />
          </children>
          <BorderPane.margin>
             <Insets bottom="50.0" top="20.0" />
@@ -47,7 +48,7 @@
       </Pane>
    </center>
    <top>
-      <Button fx:id="btnVolver" onAction="#volverAlMenuPrincipal" mnemonicParsing="false" text="Volver" BorderPane.alignment="TOP_LEFT">
+      <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#volverAlMenuPrincipal" text="Volver" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
             <Insets left="50.0" top="30.0" />
          </BorderPane.margin>

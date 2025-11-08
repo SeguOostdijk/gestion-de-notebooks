@@ -23,4 +23,10 @@ public class Docente {
 
     @Column(name="apellido", nullable=false, length=200)
     private String apellido;
+
+    @Override
+    public String toString() {
+        return dni +
+                ";  "+ nombre.concat(" "+apellido);
+    }
 }

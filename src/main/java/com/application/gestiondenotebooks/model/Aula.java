@@ -17,4 +17,8 @@ public class Aula {
     @Column(name = "codigo_aula",nullable = false,length = 20)
     private String codigo_aula;
 
+    @Override
+    public String toString() {
+        return codigo_aula;
+    }
 }

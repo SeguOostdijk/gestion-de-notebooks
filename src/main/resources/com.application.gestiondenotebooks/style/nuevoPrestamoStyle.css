@@ -68,7 +68,7 @@
 #btnEscaneo:hover   { -fx-background-color: #1c8277; -fx-cursor: hand;}
 #btnEscaneo:pressed { -fx-translate-y: 1; }
 
-#btnCancelar{
+#btnLimpiar{
   -fx-background-color: transparent;       /* “ghost” */
   -fx-text-fill: #0f172a;
   -fx-border-color: rgba(2,6,23,0.18);
@@ -78,7 +78,7 @@
   -fx-padding: 10 16;
   -fx-font-weight: 600;
 }
-#btnCancelar:hover { -fx-border-color: rgba(2,6,23,0.30); -fx-cursor: hand; }
+#btnLimpiar:hover { -fx-border-color: rgba(2,6,23,0.30); -fx-cursor: hand; }
 
 /* ===== Botón Volver (si luego le ponés fx:id="btnVolver" en el FXML) ===== */
 #btnVolver {

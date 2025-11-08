@@ -31,4 +31,7 @@ public class PrestamoEquipo {
     @Enumerated(EnumType.STRING)
     @Column(name="estado_devolucion", nullable=false, length=20)
     private EstadoDevolucion estadoDevolucion;
+
+    public PrestamoEquipo(Prestamo referenceById, Equipo equipo, EstadoDevolucion estadoDevolucion) {
+    }
 }

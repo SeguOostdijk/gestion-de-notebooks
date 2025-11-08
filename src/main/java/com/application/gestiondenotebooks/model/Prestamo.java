@@ -26,13 +26,14 @@ public class Prestamo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nro_referencia",nullable = false,length = 50)
+    @Column(name = "nro_referencia",nullable = false, length=50)
     private String nroReferencia;
 
     @ManyToOne(optional=false)
     @JoinColumn(name="docente_id", nullable=false,
             foreignKey = @ForeignKey(name="fk_prestamo_docente"))
     private Docente docente;
+
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "materia_id",nullable = false,
@@ -54,6 +55,11 @@ public class Prestamo {
     @Enumerated(EnumType.STRING)
     @Column(name="estado", nullable=false, length=20)
     private EstadoPrestamo estado;
+
+    public Prestamo(Docente selectedItem, Materia selectedItem1, LocalDate now, Turno selectedItem2, Aula selectedItem3, EstadoPrestamo estadoPrestamo) {
+    }
+
+
 
    /*
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

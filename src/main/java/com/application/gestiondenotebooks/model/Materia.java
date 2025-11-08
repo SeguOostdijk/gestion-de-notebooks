@@ -25,4 +25,9 @@ public class Materia {
     @Column(name="nombre", nullable=false, length=200)
     private String nombre;
 
+    @Override
+    public String toString() {
+        return nombre + ";  " +
+                "Plan: " + planId;
+    }
 }
