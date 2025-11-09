@@ -59,9 +59,6 @@ public class Prestamo {
     public Prestamo(Docente selectedItem, Materia selectedItem1, LocalDate now, Turno selectedItem2, Aula selectedItem3, EstadoPrestamo estadoPrestamo) {
     }
 
-
-
-
     @OneToMany(mappedBy = "prestamo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<PrestamoEquipo> equipos;
 

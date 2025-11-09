@@ -35,4 +35,12 @@ public class PrestamoEquipo {
     public PrestamoEquipo(Prestamo referenceById, Equipo equipo, EstadoDevolucion estadoDevolucion) {
     }
 
+    @Override
+    public String toString() {
+        if (equipo == null) return "Equipo no disponible";
+        return "Equipo " + equipo.getNroEquipo() + " - " + equipo.getTipo() + " (" + estadoDevolucion + ")";
+    }
+
+
+
 }

@@ -86,16 +86,28 @@ public class PrestamosActivosController implements Initializable {
     }
 
     @FXML
-    private void finalizarPrestamo() { //Cambiarlo para gestionar devolucion
+    private void gestionarDevolucion(javafx.event.ActionEvent e) throws IOException {
         if (prestamoSeleccionado != null) {
-            //prestamoSeleccionado.setActivo(false);
-            prestamoRepository.save(prestamoSeleccionado);
-            cargarPrestamos();
-            limpiarDetalle();
-            btnFinalizar.setVisible(false);
-            btnCancelar.setVisible(false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/Devolucion.fxml"));
+            loader.setControllerFactory(context::getBean); // Usa Spring
+            Parent root = loader.load();
+
+            // Pasamos el préstamo seleccionado al nuevo controlador
+            DevolucionController controller = loader.getController();
+            controller.setPrestamo(prestamoSeleccionado);
+
+            Stage stage = new Stage();
+            stage.setTitle("Devolución de equipos - Ref: " + prestamoSeleccionado.getNroReferencia());
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+            stage.show();
+
+            // Opcional: cerrar la ventana actual
+            Stage actual = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            actual.close();
         }
     }
+
 
     @FXML
     private void cancelarSeleccion() {
