@@ -15,6 +15,16 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, Long> {
     @Query("select p.id from Prestamo p where p.nroReferencia = :ref")
     Optional<Long> findIdByNroReferencia(@Param("ref") String nroReferencia);
 
+    @Query("""
+  select p
+  from Prestamo p
+  join fetch p.docente
+  join fetch p.materia
+  join fetch p.aula
+  where p.id = :id
+""")
+    Optional<Prestamo> findDetalleById(@Param("id") Long id);
+
     EstadoPrestamo estado = EstadoPrestamo.ABIERTO;
     // Método de consulta derivado para encontrar por el campo 'estado'
     // Spring genera: SELECT p FROM Prestamo p WHERE p.estado = ?1

@@ -11,6 +11,7 @@ import com.application.gestiondenotebooks.repository.DocenteRepository;
 import com.application.gestiondenotebooks.repository.MateriaRepository;
 import com.application.gestiondenotebooks.repository.PrestamoRepository;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,10 +25,10 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
@@ -107,10 +108,21 @@ public class NuevoPrestamoController implements Initializable {
                 || cmbMateria.getValue() == null;
     }
     public void configurarCmb(){
+        var todasLasMaterias = FXCollections.observableArrayList(materiaRepo.findAll());
+        var todosLosDocentes = FXCollections.observableArrayList(docenteRepo.findAll());
         cmbAula.setItems(FXCollections.observableArrayList(aulaRepo.findAll()));
-        cmbMateria.setItems(FXCollections.observableArrayList(materiaRepo.findAll()));
         cmbHorario.setItems(FXCollections.observableArrayList(Turno.MAÑANA,Turno.TARDE,Turno.NOCHE));
-        cmbDocente.setItems(FXCollections.observableArrayList(docenteRepo.findAll()));
+        cmbMateria.setItems(todasLasMaterias);
+        cmbDocente.setItems(todosLosDocentes);
+        cmbDocente.getSelectionModel().selectedItemProperty().addListener((obs, oldDoc, nuevoDoc) -> {
+            if (nuevoDoc != null) {
+                List<Materia> materias = materiaRepo.findAllByDocenteId(nuevoDoc.getId());
+                ObservableList<Materia> lista = FXCollections.observableArrayList(materias);
+                Materia seleccionActual = cmbMateria.getValue();
+
+                cmbMateria.setItems(lista);
+            }
+        });
         cmbMateria.setVisibleRowCount(5);
         cmbDocente.setVisibleRowCount(5);
         cmbAula.setVisibleRowCount(5);
@@ -138,7 +150,6 @@ public class NuevoPrestamoController implements Initializable {
         var materiaSel = cmbMateria.getSelectionModel().getSelectedItem();
         var horarioSel = cmbHorario.getSelectionModel().getSelectedItem(); // String/Enum
 
-        // MUY IMPORTANTE: usar referencias administradas
         var aulaRef    = aulaRepo.getReferenceById(aulaSel.getId());
         var docenteRef = docenteRepo.getReferenceById(docenteSel.getId());
         var materiaRef = materiaRepo.getReferenceById(materiaSel.getId());

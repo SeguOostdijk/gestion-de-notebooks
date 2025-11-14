@@ -25,7 +25,7 @@ public class Equipo {
     private int nroEquipo;
 
     @Column(name = "codigo_qr",nullable = false,length = 100)
-    private String codigo_qr;
+    private String codigoQr;
 
     @Override
     public String toString() {
