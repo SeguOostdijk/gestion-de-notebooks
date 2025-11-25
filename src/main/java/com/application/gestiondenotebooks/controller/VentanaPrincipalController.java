@@ -41,4 +41,16 @@ public class VentanaPrincipalController {
         stage.centerOnScreen();
         stage.show();
     }
+
+    public void irAHistorico(javafx.event.ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/Historico.fxml"));
+        loader.setControllerFactory(context::getBean);
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Historial de Préstamos");
+        stage.show();
+    }
+
 }

@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -46,6 +47,10 @@ public class Prestamo {
     @Enumerated(EnumType.STRING)
     @Column(name = "turno",nullable = false)
     private Turno turno;
+
+    @Column(name = "fecha_fin")
+    private LocalDateTime fechaFin;
+
 
     @ManyToOne(optional=false)
     @JoinColumn(name="aula_id", nullable=false,

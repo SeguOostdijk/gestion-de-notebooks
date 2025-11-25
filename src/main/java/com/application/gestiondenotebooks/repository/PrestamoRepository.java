@@ -12,6 +12,9 @@ import java.util.Optional;
 
 @Repository
 public interface PrestamoRepository extends JpaRepository<Prestamo, Long> {
+
+    List<Prestamo> findByEstadoOrderByFechaFinDesc(EstadoPrestamo estado);
+
     @Query("select p.id from Prestamo p where p.nroReferencia = :ref")
     Optional<Long> findIdByNroReferencia(@Param("ref") String nroReferencia);
 
