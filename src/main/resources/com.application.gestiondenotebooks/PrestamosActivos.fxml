@@ -1,58 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="750.0" prefWidth="900.0" stylesheets="@style/prestamosActivosStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.gestiondenotebooks.controller.PrestamosActivosController">
 
     <center>
-        <Pane fx:id="prestamosActivosPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" style="-fx-border-style: solid;" BorderPane.alignment="CENTER">
+        <Pane fx:id="prestamosActivosPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="652.0" prefWidth="594.0" style="-fx-border-style: solid;" BorderPane.alignment="CENTER">
             <children>
-                <Label layoutX="28.0" layoutY="61.0" text="Prestamos Activos">
+                <Label layoutX="26.0" layoutY="27.0" text="Prestamos Activos">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
 
-                <Label layoutX="32.0" layoutY="94.0" text="Listado de préstamos actualmente en curso" />
+                <Label layoutX="26.0" layoutY="60.0" text="Listado de préstamos actualmente en curso" />
 
-                <ListView fx:id="listPrestamos" layoutX="31.0" layoutY="125.0" prefHeight="250.0" prefWidth="530.0" />
+                <ListView fx:id="listPrestamos" layoutX="26.0" layoutY="87.0" prefHeight="250.0" prefWidth="530.0" />
 
-                <Label layoutX="25.0" layoutY="388.0" text="Detalle del préstamo seleccionado:">
+                <Label layoutX="26.0" layoutY="362.0" text="Detalle del préstamo seleccionado:">
                     <font><Font name="System Italic" size="14.0" /></font>
                 </Label>
 
-                <VBox fx:id="detallePane" layoutX="31.0" layoutY="427.0" spacing="5.0">
-                    <children>
-                        <Label text="N° de Referencia:" />
-                        <Label fx:id="lblNroReferencia" styleClass="detalle-label" />
-                        <Label text="Docente:" />
-                        <Label fx:id="lblDocente" styleClass="detalle-label" />
-                        <Label text="Materia:" />
-                        <Label fx:id="lblMateria" styleClass="detalle-label" />
-                        <Label text="Horario:" />
-                        <Label fx:id="lblHorario" styleClass="detalle-label" />
-                        <Label text="Aula:" />
-                        <Label fx:id="lblAula" styleClass="detalle-label" />
-                        <Label text="Equipos:" />
-                        <Label fx:id="lblEquiposDetalle" styleClass="detalle-label" />
-                    </children>
-                </VBox>
-
-                <HBox layoutX="156.0" layoutY="717.0" spacing="10.0">
-                    <children>
-                        <Button fx:id="btnFinalizar" onAction="#gestionarDevolucion" text="Gestionar Devolucion" visible="false" />
-                        <Button fx:id="btnCancelar" onAction="#cancelarSeleccion" text="Cancelar selección" visible="false" />
-                    </children>
-                </HBox>
-            <Button fx:id="btnVolver" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#irAVentanaPrincipal" text="Volver" />
+                <HBox layoutX="156.0" layoutY="717.0" spacing="10.0" />
+            <Pane fx:id="detallePane" layoutX="26.0" layoutY="392.0" prefHeight="142.0" prefWidth="530.0">
+               <children>
+                        <Label layoutX="13.0" layoutY="14.0" text="N° de Referencia:" />
+                        <Label fx:id="lblNroReferencia" layoutX="123.0" layoutY="14.0" prefHeight="20.0" prefWidth="141.0" styleClass="detalle-label" />
+                        <Label layoutX="11.0" layoutY="42.0" text="Docente:" />
+                        <Label fx:id="lblDocente" layoutX="76.0" layoutY="42.0" prefHeight="20.0" prefWidth="224.0" styleClass="detalle-label" />
+                        <Label layoutX="12.0" layoutY="70.0" text="Materia:" />
+                        <Label fx:id="lblMateria" layoutX="76.0" layoutY="70.0" prefHeight="20.0" prefWidth="237.0" styleClass="detalle-label" />
+                        <Label layoutX="339.0" layoutY="14.0" text="Horario:" />
+                        <Label fx:id="lblHorario" layoutX="394.0" layoutY="14.0" prefHeight="20.0" prefWidth="108.0" styleClass="detalle-label" />
+                        <Label layoutX="339.0" layoutY="42.0" text="Aula:" />
+                        <Label fx:id="lblAula" layoutX="376.0" layoutY="42.0" prefHeight="20.0" prefWidth="56.0" styleClass="detalle-label" />
+                        <Label layoutX="11.0" layoutY="97.0" text="Equipos:" />
+                        <Label fx:id="lblEquiposDetalle" layoutX="76.0" layoutY="97.0" prefHeight="20.0" prefWidth="252.0" styleClass="detalle-label" />
+               </children>
+            </Pane>
+                  <Button fx:id="btnFinalizar" layoutX="91.0" layoutY="571.0" onAction="#gestionarDevolucion" text="Gestionar Devolucion" visible="false" />
+                  <Button fx:id="btnCancelar" layoutX="341.0" layoutY="571.0" onAction="#cancelarSeleccion" text="Cancelar selección" visible="false" />
             </children>
         </Pane>
     </center>
+   <top>
+      <Button fx:id="btnVolver" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#irAVentanaPrincipal" text="Volver" BorderPane.alignment="TOP_LEFT">
+         <BorderPane.margin>
+            <Insets left="20.0" top="20.0" />
+         </BorderPane.margin>
+      </Button>
+   </top>
 </BorderPane>

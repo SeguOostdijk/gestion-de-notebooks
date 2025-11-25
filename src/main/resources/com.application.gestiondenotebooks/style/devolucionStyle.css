@@ -72,7 +72,7 @@
 /* ===== Botones ===== */
 #btnRegistrarDevolucion,
 #btnFinalizar,
-#btnVolver {
+#btnVolver{
   -fx-background-radius: 12;
   -fx-padding: 10 16;
   -fx-font-weight: 700;
@@ -80,23 +80,32 @@
   -fx-cursor: hand;
 }
 
-/* Botón Registrar */
-#btnRegistrarDevolucion {
+#btnFinalizarPrestamo, #btnVolverQR, #btnIngresoManual{
   -fx-background-color: #298a80;
   -fx-text-fill: white;
   -fx-border-color: transparent;
+  -fx-font-weight: 700;
+  -fx-border-radius: 12;
+  fx-background-radius: 12;
+  -fx-cursor: hand;
+  -fx-padding: 10 16;
+  
 }
-#btnRegistrarDevolucion:hover {
-  -fx-background-color: #1c8277;
+/* Botón Finalizar préstamo */
+
+#btnDevolverManual{
+  -fx-background-color: #298a80;
+  -fx-text-fill: white;
+  -fx-border-color: transparent;
+  -fx-font-weight: 700;
+  -fx-border-radius: 12;
+  fx-background-radius: 10;
+  -fx-cursor: hand;
+  -fx-padding: 5 10 ;
 }
 
-/* Botón Finalizar préstamo */
-#btnFinalizar {
-  -fx-background-color: #298a80;
-  -fx-text-fill: white;
-  -fx-border-color: transparent;
-}
-#btnFinalizar:hover {
+
+#btnFinalizarPrestamo:hover, #btnDevolverManual:hover, #btnVolverQR:hover, #btnIngresoManual:hover{
   -fx-background-color: #1c8277;
 }
 
@@ -106,12 +115,25 @@
   -fx-text-fill: #0f172a;
   -fx-border-color: rgba(2,6,23,0.18);
   -fx-border-width: 1;
+  -fx-border-radius: 999;
+  -fx-background-radius: 999;
+  -fx-padding: 6 12;
 }
 #btnVolver:hover {
   -fx-border-color: rgba(2,6,23,0.30);
   -fx-background-color: #298a80;
   -fx-text-fill: white;
   -fx-font-weight: 700;
+}
+#btnCancelarSeleccion {
+  -fx-background-color: transparent;
+  -fx-text-fill: #0f172a;
+  -fx-border-color: rgba(2,6,23,0.18);
+  -fx-border-width: 1;
+}
+
+#btnCancelarSeleccion:hover {
+  -fx-border-color: rgba(2,6,23,0.30);
 }
 
 
