@@ -6,10 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 
 public interface EquipoRepository extends JpaRepository<Equipo,Long> {
     Optional<Equipo> findByTipoAndNroEquipo(TipoEquipo tipo, Integer nroEquipo);
     Optional<Equipo> findByCodigoQr(String codigoqr);
+    @Query("SELECT e.tipo, COUNT(e) FROM Equipo e GROUP BY e.tipo")
+    List<Object[]> countTotalEquiposPorTipo();
 }

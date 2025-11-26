@@ -52,8 +52,7 @@
     </center>
    <top>
       <Button fx:id="btnVolver" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#irAVentanaPrincipal" text="Volver" BorderPane.alignment="TOP_LEFT">
-         <BorderPane.margin>
-            <Insets left="20.0" top="20.0" />
+         <BorderPane.mars left="20.0" top="20.0" />
          </BorderPane.margin>
       </Button>
    </top>
