@@ -1,9 +1,12 @@
 package com.application.gestiondenotebooks.repository;
 
+import com.application.gestiondenotebooks.enums.EstadoDevolucion;
 import com.application.gestiondenotebooks.model.Equipo;
 import com.application.gestiondenotebooks.model.Prestamo;
 import com.application.gestiondenotebooks.model.PrestamoEquipo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,5 +16,11 @@ import java.util.Optional;
 public interface PrestamoEquipoRepository extends JpaRepository<PrestamoEquipo, Long> {
     List<PrestamoEquipo> findByPrestamo(Prestamo prestamo);
     Optional<PrestamoEquipo> findByEquipoAndPrestamo(Equipo equipo,Prestamo prestamo);
+    // Nuevo: Cuenta cuántos equipos (por tipo) están actualmente en préstamo.
+    @Query("SELECT pe.equipo.tipo, COUNT(pe) " +
+            "FROM PrestamoEquipo pe " +
+            "WHERE pe.estadoDevolucion = :estado " +
+            "GROUP BY pe.equipo.tipo")
+    List<Object[]> countByEstadoDevolucion(@Param("estado") EstadoDevolucion estado);
 }
 

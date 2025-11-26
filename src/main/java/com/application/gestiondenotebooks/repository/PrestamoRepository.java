@@ -13,7 +13,12 @@ import java.util.Optional;
 @Repository
 public interface PrestamoRepository extends JpaRepository<Prestamo, Long> {
 
-    List<Prestamo> findByEstadoOrderByFechaFinDesc(EstadoPrestamo estado);
+    /**
+     * Busca préstamos por su estado y los ordena por la fecha de finalización
+     * (fecha en que fue cerrado) de forma descendente (los más recientes primero).
+     * Ideal para el historial o la vista de cerrados.
+     */
+    List<Prestamo> findByEstadoOrderByFechaFinDesc(EstadoPrestamo estado); // ESTE ES EL MÉTODO REQUERIDO
 
     @Query("select p.id from Prestamo p where p.nroReferencia = :ref")
     Optional<Long> findIdByNroReferencia(@Param("ref") String nroReferencia);
@@ -28,9 +33,9 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, Long> {
 """)
     Optional<Prestamo> findDetalleById(@Param("id") Long id);
 
-    EstadoPrestamo estado = EstadoPrestamo.ABIERTO;
-    // Método de consulta derivado para encontrar por el campo 'estado'
-    // Spring genera: SELECT p FROM Prestamo p WHERE p.estado = ?1
+    /**
+     * Método simple para buscar por estado (útil para Préstamos Activos = ABIERTO).
+     */
     List<Prestamo> findByEstado(EstadoPrestamo estado);
 }
 
