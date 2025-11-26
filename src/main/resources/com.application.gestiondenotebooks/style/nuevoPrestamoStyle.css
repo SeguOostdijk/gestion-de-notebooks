@@ -55,9 +55,16 @@
   -fx-background-radius: 10;
   -fx-border-radius: 10;
 }
-
+#btnOtroDocente, #btnOtraMateria{
+  -fx-background-radius: 10;
+  -fx-padding: 8 10;
+  -fx-font-weight: 700;
+  -fx-background-color: #298a80;   /* primario celeste como la home */
+  -fx-text-fill: white;
+  -fx-border-color: transparent;
+}
 /* ===== Botones ===== */
-#btnEscaneo {
+#btnEscaneo, #btnGuardar {
   -fx-background-radius: 12;
   -fx-padding: 10 16;
   -fx-font-weight: 700;
@@ -65,9 +72,48 @@
   -fx-text-fill: white;
   -fx-border-color: transparent;
 }
-#btnEscaneo:hover   { -fx-background-color: #1c8277; -fx-cursor: hand;}
-#btnEscaneo:pressed { -fx-translate-y: 1; }
+#btnAgregarMateria{
+  -fx-background-radius: 10;
+  -fx-padding: 4 6;
+  -fx-font-weight: 700;
+  -fx-background-color: #298a80;   /* primario celeste como la home */
+  -fx-text-fill: white;
+  -fx-border-color: transparent;
+}
+#btnCancelar{
+  -fx-background-color: transparent;       /* “ghost” */
+  -fx-text-fill: #0f172a;
+  -fx-border-color: rgba(2,6,23,0.18);
+  -fx-border-width: 1;
+  -fx-border-radius: 12;
+  -fx-background-radius: 12;
+  -fx-padding: 10 16;
+  -fx-font-weight: 600;
+}
+#btnCancelar:hover { -fx-border-color: rgba(2,6,23,0.30); -fx-cursor: hand; }
+.list-view {
+    -fx-background-color: #f8f9fa;    /* gris suave */
+    -fx-border-color: #d0d7de;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+}
+#btnEliminar{
+  -fx-background-color: #950606;       /* “ghost” */
+  -fx-text-fill: #ffff;
+  -fx-border-color: rgba(2,6,23,0.18);
+  -fx-border-width: 1;
+  -fx-border-radius: 12;
+  -fx-background-radius: 12;
+  -fx-padding: 10 16;
+  -fx-font-weight: 600;
+}
+#btnEliminar:hover { -fx-border-color: rgba(2,6,23,0.30); -fx-cursor: hand; }
 
+#btnEscaneo:hover, #btnGuardar:hover   { -fx-background-color: #1c8277; -fx-cursor: hand;}
+#btnEscaneo:pressed, #btnGuardar:pressed { -fx-translate-y: 1; }
+#btnOtroDocente:hover, #btnOtraMateria:hover{-fx-background-color: #1c8277; -fx-cursor: hand;}
+#btnOtroDocente:pressed, #btnOtraMateria:pressed {-fx-translate-y: 1;}
 #btnLimpiar{
   -fx-background-color: transparent;       /* “ghost” */
   -fx-text-fill: #0f172a;

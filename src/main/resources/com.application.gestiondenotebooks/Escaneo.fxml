@@ -24,7 +24,7 @@
             </Label>
             <Label fx:id="labelSubtitulo" layoutX="32.0" layoutY="67.0" text="Complete los datos del préstamo y escanee los equipos en el aula administrativa" />
             <Label fx:id="labelNroRef" layoutX="35.0" layoutY="100.0" text="Número de Referencia:" />
-            <Label fx:id="labelNroRefPrest" layoutX="165.0" layoutY="100.0" />
+            <Label fx:id="labelNroRefPrest" layoutX="190.0" layoutY="100.0" prefHeight="18.0" prefWidth="156.0" />
             <Button fx:id="btnCancelar" layoutX="346.0" layoutY="626.0" mnemonicParsing="false" onAction="#cancelarSeleccion" text="Cancelar" visible="false" />
             <Pane fx:id="escanearEquiposPane" layoutX="115.0" layoutY="152.0" prefHeight="33.0" prefWidth="370.0" style="-fx-background-color: white; -fx-border-style: solid; -fx-border-radius: 14px;">
                <children>
@@ -83,4 +83,11 @@
          </children>
       </Pane>
    </center>
+   <top>
+      <Button fx:id="btnVolver" onAction="#volver" mnemonicParsing="false"  text="Volver" BorderPane.alignment="TOP_LEFT">
+         <BorderPane.margin>
+            <Insets left="35.0" top="25.0" />
+         </BorderPane.margin>
+      </Button>
+   </top>
 </BorderPane>

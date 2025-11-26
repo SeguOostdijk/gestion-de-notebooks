@@ -12,14 +12,21 @@ import com.application.gestiondenotebooks.repository.PrestamoEquipoRepository;
 import com.application.gestiondenotebooks.repository.PrestamoRepository;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import java.io.File;
 import java.net.URL;
@@ -33,6 +40,9 @@ import java.util.ResourceBundle;
 public class EscaneoController implements Initializable {
     @Autowired
     private EquipoRepository repository;
+    @Autowired
+    private ApplicationContext context;
+
     private Equipo equipoSeleccionado;
     private Long id;
     @FXML
@@ -44,7 +54,7 @@ public class EscaneoController implements Initializable {
     @FXML
     private Button btnEliminar;
     @FXML
-    private Label labelCampoOblig;
+    private Label labelCampoOblig, labelNroRefPrest;
     @FXML
     private TextField txtEquipos;
     @FXML
@@ -98,13 +108,13 @@ public class EscaneoController implements Initializable {
     private void manejarCodigoEscaneado(String codigo) {
         Optional<Equipo> equipoOpt=equipoRepo.findByCodigoQr(codigo);
         if (equipoOpt.isEmpty())
-            mostrarWarn("Error en el ingreso","Error","No existe un equipo asociado al código qr: "+codigo);
+            mostrarMensaje("Error en el ingreso","Error","No existe un equipo asociado al código qr: "+codigo, Alert.AlertType.WARNING);
         else{
             Equipo equipo = equipoOpt.get();
             boolean yaEnLista = listEquipos.getItems().stream()
                     .anyMatch(e -> e.getId().equals(equipo.getId()));
             if (yaEnLista) {
-                mostrarWarn("Error en el ingreso","Error","Ese equipo ya fue agregado a este préstamo.");
+                mostrarMensaje("Error en el ingreso","Error","Ese equipo ya fue agregado a este préstamo.", Alert.AlertType.WARNING);
             }
             else{
                 listEquipos.getItems().add(equipo);
@@ -116,6 +126,7 @@ public class EscaneoController implements Initializable {
 
     public void init(String nroReferencia) {
         this.idReferencia = prestamoRepo.findIdByNroReferencia(nroReferencia).get();/* cargar datos, etc. */
+        labelNroRefPrest.setText(nroReferencia);
     }
 
     public void configurarCMB(){
@@ -149,13 +160,13 @@ public class EscaneoController implements Initializable {
                 cmbEquipos.getSelectionModel().select(TipoEquipo.NOTEBOOK);
             Optional<Equipo> equipoOpt=equipoRepo.findByTipoAndNroEquipo(cmbEquipos.getSelectionModel().getSelectedItem(),Integer.valueOf(txtEquipos.getText()));
             if (equipoOpt.isEmpty())
-                mostrarWarn("Error en el ingreso","Error","No existe un equipo " + cmbEquipos.getSelectionModel().getSelectedItem().toString() +" Nº " + txtEquipos.getText() +" en inventario.");
+                mostrarMensaje("Error en el ingreso","Error","No existe un equipo " + cmbEquipos.getSelectionModel().getSelectedItem().toString() +" Nº " + txtEquipos.getText() +" en inventario.", Alert.AlertType.WARNING);
             else{
                 Equipo equipo = equipoOpt.get();
                 boolean yaEnLista = listEquipos.getItems().stream()
                         .anyMatch(e -> e.getId().equals(equipo.getId()));
                 if (yaEnLista) {
-                    mostrarWarn("Error en el ingreso","Error","Ese equipo ya fue agregado a este préstamo.");
+                    mostrarMensaje("Error en el ingreso","Error","Ese equipo ya fue agregado a este préstamo.", Alert.AlertType.WARNING);
                 }
                 else{
                     listEquipos.getItems().add(equipo);
@@ -169,15 +180,15 @@ public class EscaneoController implements Initializable {
         btnEliminar.setVisible(false);
         btnCrearPrestamo.setVisible(true);
     }
-    private void mostrarWarn(String titulo, String cabecera, String contenido) {
-        Alert a = new Alert(Alert.AlertType.WARNING);
+    private void mostrarMensaje(String titulo, String cabecera, String contenido, Alert.AlertType alertType) {
+        Alert a = new Alert(alertType);
         a.setTitle(titulo);
         a.setHeaderText(cabecera);
         a.setContentText(contenido);
         a.showAndWait();
     }
     @FXML
-    private void crearPrestamoEquipos(){
+    private void crearPrestamoEquipos(javafx.event.ActionEvent e){
         List<Integer> listaNotebooks = new ArrayList<>();  //Para coleccionar los nro. de notebooks de la lista de impresion
         Prestamo prestamoActual=prestamoRepo.findDetalleById(idReferencia)
                 .orElseThrow(() -> new IllegalArgumentException("Préstamo no existe"));
@@ -191,6 +202,7 @@ public class EscaneoController implements Initializable {
             if(equipoActual.getTipo().equals(TipoEquipo.NOTEBOOK))
                 listaNotebooks.add(equipoActual.getNroEquipo());
         }
+        mostrarMensaje("Guardado con éxito","Éxito","Préstamo registrado correctamente", Alert.AlertType.INFORMATION);
         try {
             File pdf = PdfGenerator.generarFormularioPrestamo(
                     prestamoActual.getNroReferencia(),
@@ -203,10 +215,65 @@ public class EscaneoController implements Initializable {
 
             GestiondenotebooksApplication.getHostServicesInstance()
                     .showDocument(pdf.toURI().toString());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        javafx.application.Platform.runLater(() -> irAVentanaPrincipal(e));
+    }
+
+    public void irAVentanaPrincipal(javafx.event.ActionEvent e) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/VentanaPrincipal.fxml"));
+            loader.setControllerFactory(context::getBean);  // <-- para que Spring cree el controller
+            Parent root = loader.load();
+            // obtener el Stage actual desde el botón que disparó el evento
+            Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
 
+    @FXML
+    private void volver(javafx.event.ActionEvent e) {
+        // 1. Armo el alert de confirmación
+        ButtonType btnAceptar  = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+        ButtonType btnCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "¿Desea cancelar el préstamo actual?",
+                btnAceptar, btnCancelar);
+
+        alert.setTitle("Cancelar préstamo");
+        alert.setHeaderText("¿Cancelar el préstamo?");
+
+        Optional<ButtonType> resultado = alert.showAndWait();
+
+        // 2. Si Aceptar → cancelo y vuelvo
+        if (resultado.isPresent() && resultado.get() == btnAceptar) {
+           prestamoRepo.deleteById(idReferencia);
+            // volver a la pantalla anterior
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/NuevoPrestamo.fxml"));
+                loader.setControllerFactory(context::getBean);  // <-- para que Spring cree el controller
+                Parent root = loader.load();
+                // obtener el Stage actual desde el botón que disparó el evento
+                Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.show();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        // 3. Si Cancelar → no hago nada (se queda en la pantalla)
+    }
 }
+
+

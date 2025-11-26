@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -76,6 +77,7 @@ public class NuevoPrestamoController implements Initializable {
         Parent root = loader.load();
         // obtener el Stage actual desde el botón que disparó el evento
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setTitle("Sistema de Gestión de Notebooks - CAECE");
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.centerOnScreen();
@@ -102,10 +104,10 @@ public class NuevoPrestamoController implements Initializable {
         }
     }
     public boolean hayCamposIncompletos() {
-        return cmbAula.getValue() == null
-                || cmbDocente.getValue() == null
-                || cmbHorario.getValue() == null
-                || cmbMateria.getValue() == null;
+        return cmbDocente.getValue()==null ||
+                cmbMateria.getValue()==null ||
+                cmbAula.getValue()==null ||
+                cmbHorario.getValue()==null;
     }
     public void configurarCmb(){
         var todasLasMaterias = FXCollections.observableArrayList(materiaRepo.findAll());
@@ -114,15 +116,6 @@ public class NuevoPrestamoController implements Initializable {
         cmbHorario.setItems(FXCollections.observableArrayList(Turno.MAÑANA,Turno.TARDE,Turno.NOCHE));
         cmbMateria.setItems(todasLasMaterias);
         cmbDocente.setItems(todosLosDocentes);
-        cmbDocente.getSelectionModel().selectedItemProperty().addListener((obs, oldDoc, nuevoDoc) -> {
-            if (nuevoDoc != null) {
-                List<Materia> materias = materiaRepo.findAllByDocenteId(nuevoDoc.getId());
-                ObservableList<Materia> lista = FXCollections.observableArrayList(materias);
-                Materia seleccionActual = cmbMateria.getValue();
-
-                cmbMateria.setItems(lista);
-            }
-        });
         cmbMateria.setVisibleRowCount(5);
         cmbDocente.setVisibleRowCount(5);
         cmbAula.setVisibleRowCount(5);
@@ -150,6 +143,7 @@ public class NuevoPrestamoController implements Initializable {
         var materiaSel = cmbMateria.getSelectionModel().getSelectedItem();
         var horarioSel = cmbHorario.getSelectionModel().getSelectedItem(); // String/Enum
 
+
         var aulaRef    = aulaRepo.getReferenceById(aulaSel.getId());
         var docenteRef = docenteRepo.getReferenceById(docenteSel.getId());
         var materiaRef = materiaRepo.getReferenceById(materiaSel.getId());
@@ -166,4 +160,21 @@ public class NuevoPrestamoController implements Initializable {
         prestamoRepo.save(p);
     }
 
+    @FXML
+    private void irANuevoDocente(javafx.event.ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/OtroDocente.fxml"));
+        loader.setControllerFactory(context::getBean);  // <-- para que Spring cree el controller
+        Parent root = loader.load();
+        // obtener el Stage actual desde el botón que disparó el evento
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Agregar un nuevo docente");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    public void setDocenteCmb(Docente nuevoDocente) {
+        cmbDocente.getSelectionModel().select(nuevoDocente);
+    }
 }

@@ -142,6 +142,7 @@ public class DevolucionController implements Initializable {
         btnDevolverManual.setVisible(false);
         btnCancelarSeleccion.setVisible(false);
         btnVolverQR.setVisible(true);
+        listEquipos.getSelectionModel().clearSelection();
         actualizarLista();
     }
     public void actualizarLista(){
