@@ -101,7 +101,7 @@ public class OtroDocenteController implements Initializable {
     private void agregarMateria(ActionEvent event) {
         Materia seleccionada = cmbMaterias.getValue();
         if (seleccionada == null) {
-            mostrarWarn("Error en el ingreso","Error","Debe seleccionar una materia para añadirla a la lista");
+            mostrarMensaje("Error en el ingreso","Error","Debe seleccionar una materia para añadirla a la lista", Alert.AlertType.WARNING);
         }
         else {
         // Evitar duplicados
@@ -111,7 +111,7 @@ public class OtroDocenteController implements Initializable {
             cmbMaterias.setValue(null);
           }
           else
-            mostrarWarn("Error en el ingreso", "Error","La materia seleccionada ya está en la lista");
+            mostrarMensaje("Error en el ingreso", "Error","La materia seleccionada ya está en la lista", Alert.AlertType.WARNING);
         }
     }
 
@@ -155,20 +155,26 @@ public class OtroDocenteController implements Initializable {
                 campoObligApellido.setVisible(true);
         }
         else {
-            nuevoDocente=new Docente();
-            nuevoDocente.setNombre(txtNombre.getText().toUpperCase());
-            nuevoDocente.setApellido(txtApellido.getText().toUpperCase());
-            nuevoDocente.setDni(txtDNI.getText());
-            docenteRepo.save(nuevoDocente);
-            if(!listaMaterias.getItems().isEmpty()){
-                for (int i=0;i<listaMaterias.getItems().size();i++){
-                    DocenteMateria docenteMateria=new DocenteMateria();
-                    docenteMateria.setDocente(nuevoDocente);
-                    docenteMateria.setMateria(listaMaterias.getItems().get(i));
-                    docenteMateriaRepo.save(docenteMateria);
+            if(!docenteRepo.existsByDni(txtDNI.getText())) {
+                nuevoDocente = new Docente();
+                nuevoDocente.setNombre(txtNombre.getText().toUpperCase());
+                nuevoDocente.setApellido(txtApellido.getText().toUpperCase());
+                nuevoDocente.setDni(txtDNI.getText());
+                docenteRepo.save(nuevoDocente);
+                if (!listaMaterias.getItems().isEmpty()) {
+                    for (int i = 0; i < listaMaterias.getItems().size(); i++) {
+                        DocenteMateria docenteMateria = new DocenteMateria();
+                        docenteMateria.setDocente(nuevoDocente);
+                        docenteMateria.setMateria(listaMaterias.getItems().get(i));
+                        docenteMateriaRepo.save(docenteMateria);
+                    }
                 }
+                mostrarMensaje("Éxito","Docente registrado correctamente","", Alert.AlertType.INFORMATION);
+                javafx.application.Platform.runLater(() -> irANuevoPrestamo(e));
             }
-            javafx.application.Platform.runLater(() -> irANuevoPrestamo(e));
+            else {
+                mostrarMensaje("Error en el ingreso","Error","El docente con dni "+txtDNI.getText()+" ya está registrado en el sistema", Alert.AlertType.WARNING);
+            }
         }
     }
 
@@ -190,7 +196,7 @@ public class OtroDocenteController implements Initializable {
 
         } catch (IOException ex) {
             ex.printStackTrace();
-            mostrarWarn("Error", "No se pudo volver a nuevo prestamo.","Intentelo de nuevo");
+            mostrarMensaje("Error", "No se pudo volver a nuevo prestamo","", Alert.AlertType.WARNING);
         }
     }
 
@@ -200,8 +206,8 @@ public class OtroDocenteController implements Initializable {
                 txtApellido.getText().isEmpty();
     }
 
-    private void mostrarWarn(String titulo, String cabecera, String contenido) {
-        Alert a = new Alert(Alert.AlertType.WARNING);
+    private void mostrarMensaje(String titulo, String cabecera, String contenido, Alert.AlertType alertType) {
+        Alert a = new Alert(alertType);
         a.setTitle(titulo);
         a.setHeaderText(cabecera);
         a.setContentText(contenido);

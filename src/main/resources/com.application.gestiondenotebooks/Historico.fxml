@@ -34,30 +34,30 @@
                 <Label id="labelDetalleTitulo" layoutX="26" layoutY="362" text="Detalle del préstamo seleccionado:" />
 
                 <!-- ===== PANEL DE DETALLE ===== -->
-                <Pane fx:id="detallePane" layoutX="26" layoutY="392" prefHeight="190" prefWidth="575.0">
+                <Pane fx:id="detallePane" layoutX="26.0" layoutY="392.0" prefHeight="190" prefWidth="575.0">
 
                     <children>
 
-                        <Label layoutX="13" layoutY="14" text="N° de Referencia:" />
-                        <Label fx:id="lblNroReferencia" layoutX="130" layoutY="14" styleClass="detalle-valor" />
+                        <Label layoutX="21.0" layoutY="24.0" text="N° de Referencia:" />
+                        <Label fx:id="lblNroReferencia" layoutX="130.0" layoutY="24.0" prefHeight="20.0" prefWidth="102.0" styleClass="detalle-valor" />
 
-                        <Label layoutX="13" layoutY="42" text="Docente:" />
-                        <Label fx:id="lblDocente" layoutX="130" layoutY="42" styleClass="detalle-valor" />
+                        <Label layoutX="20.0" layoutY="52.0" text="Docente:" />
+                        <Label fx:id="lblDocente" layoutX="88.0" layoutY="52.0" prefHeight="20.0" prefWidth="192.0" styleClass="detalle-valor" />
 
-                        <Label layoutX="13" layoutY="70" text="Materia:" />
-                        <Label fx:id="lblMateria" layoutX="130" layoutY="70" styleClass="detalle-valor" />
+                        <Label layoutX="20.0" layoutY="80.0" text="Materia:" />
+                        <Label fx:id="lblMateria" layoutX="80.0" layoutY="80.0" prefHeight="20.0" prefWidth="185.0" styleClass="detalle-valor" />
 
-                        <Label layoutX="270" layoutY="14" text="Horario:" />
-                        <Label fx:id="lblHorario" layoutX="330" layoutY="14" styleClass="detalle-valor" />
+                        <Label layoutX="354.0" layoutY="24.0" text="Horario:" />
+                        <Label fx:id="lblHorario" layoutX="413.0" layoutY="24.0" prefHeight="20.0" prefWidth="119.0" styleClass="detalle-valor" />
 
-                        <Label layoutX="270" layoutY="42" text="Aula:" />
-                        <Label fx:id="lblAula" layoutX="330" layoutY="42" styleClass="detalle-valor" />
+                        <Label layoutX="354.0" layoutY="52.0" text="Aula:" />
+                        <Label fx:id="lblAula" layoutX="395.0" layoutY="52.0" prefHeight="20.0" prefWidth="137.0" styleClass="detalle-valor" />
 
-                        <Label layoutX="13" layoutY="98" text="Equipos:" />
-                        <Label fx:id="lblEquipos" layoutX="130" layoutY="98" prefWidth="350" wrapText="true" styleClass="detalle-valor" />
+                        <Label layoutX="21.0" layoutY="108.0" text="Equipos:" />
+                        <Label fx:id="lblEquipos" layoutX="80.0" layoutY="108.0" prefWidth="350" styleClass="detalle-valor" wrapText="true" />
 
-                        <Label layoutX="13" layoutY="140" text="Fecha de cierre:" />
-                        <Label fx:id="lblFechaFin" layoutX="130" layoutY="140" styleClass="detalle-valor" />
+                        <Label layoutX="22.0" layoutY="140.0" text="Fecha de cierre:" />
+                        <Label fx:id="lblFechaFin" layoutX="130" layoutY="140" prefHeight="20.0" prefWidth="155.0" styleClass="detalle-valor" />
 
                     </children>
 

@@ -98,12 +98,12 @@ public class PrestamosActivosController implements Initializable {
                             return;
                         }
 
-                        String docente = item.getDocente() != null ? item.getDocente().getNombre() : "—";
+                        String docente = item.getDocente() != null ? item.getDocente().getNombre()+" "+item.getDocente().getApellido() : "—";
                         String materia = item.getMateria() != null ? item.getMateria().getNombre() : "—";
 
-                        setText("Ref: " + item.getNroReferencia()
-                                + "   | Docente: " + docente
-                                + "   | Materia: " + materia);
+                        setText("REF-" + item.getNroReferencia()
+                                + ";  " + docente
+                                + ";  " + materia);
                     }
                 };
             }

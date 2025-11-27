@@ -17,6 +17,7 @@ public interface DocenteRepository extends JpaRepository<Docente,Long> {
   where dm.materia.id = :materiaId
 """)
     List<Docente> findAllByMateriaId(@Param("materiaId") Long materiaId);
+    boolean existsByDni(String dni);
 
 }
 

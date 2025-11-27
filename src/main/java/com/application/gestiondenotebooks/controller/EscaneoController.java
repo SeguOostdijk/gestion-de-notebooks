@@ -202,7 +202,7 @@ public class EscaneoController implements Initializable {
             if(equipoActual.getTipo().equals(TipoEquipo.NOTEBOOK))
                 listaNotebooks.add(equipoActual.getNroEquipo());
         }
-        mostrarMensaje("Guardado con éxito","Éxito","Préstamo registrado correctamente", Alert.AlertType.INFORMATION);
+        mostrarMensaje("Éxito","Préstamo registrado correctamente", "",Alert.AlertType.INFORMATION);
         try {
             File pdf = PdfGenerator.generarFormularioPrestamo(
                     prestamoActual.getNroReferencia(),

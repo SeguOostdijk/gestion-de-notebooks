@@ -1,6 +1,7 @@
 package com.application.gestiondenotebooks.repository;
 
 import com.application.gestiondenotebooks.model.Materia;
+import javafx.scene.control.TextField;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +18,9 @@ public interface MateriaRepository extends JpaRepository<Materia,Long> {
   where dm.docente.id = :docenteId
 """)
     List<Materia> findAllByDocenteId(@Param("docenteId") Long docenteId);
+
+    @Query("select distinct planId from Materia")
+    List<String> findAllPlanId();
+
+    boolean existsByNombreAndPlanId(String nombre, String planId);
 }

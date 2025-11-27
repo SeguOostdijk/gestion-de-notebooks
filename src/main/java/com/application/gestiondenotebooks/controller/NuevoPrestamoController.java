@@ -137,18 +137,7 @@ public class NuevoPrestamoController implements Initializable {
         cmbMateria.getSelectionModel().clearSelection();
         cmbHorario.getSelectionModel().clearSelection();
     }
-    public void irAVentanaPrincipal(javafx.event.ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/VentanaPrincipal.fxml"));
-        loader.setControllerFactory(context::getBean);  // <-- para que Spring cree el controller
-        Parent root = loader.load();
-        // obtener el Stage actual desde el botón que disparó el evento
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("Gestión de Notebooks CAECE");
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
-    }
+
     public void crearPrestamo() {
         var aulaSel    = cmbAula.getSelectionModel().getSelectedItem();
         var docenteSel = cmbDocente.getSelectionModel().getSelectedItem();
@@ -187,7 +176,24 @@ public class NuevoPrestamoController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    private void irANuevaMateria(javafx.event.ActionEvent e) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/OtraMateria.fxml"));
+        loader.setControllerFactory(context::getBean);  // <-- para que Spring cree el controller
+        Parent root = loader.load();
+        // obtener el Stage actual desde el botón que disparó el evento
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Agregar una nueva materia");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
     public void setDocenteCmb(Docente nuevoDocente) {
         cmbDocente.getSelectionModel().select(nuevoDocente);
+    }
+
+    public void setMateriaCmb(Materia nuevaMateria) {
+        cmbMateria.getSelectionModel().select(nuevaMateria);
     }
 }
