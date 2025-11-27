@@ -6,8 +6,15 @@
     -fx-background-color: #f6f7f9;
 }
 
-/* ===== Panel principal ===== */
-#historialPane {
+/* ===== TÍTULO PRINCIPAL ===== */
+#labelPrincipal {
+    -fx-font-size: 22px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #0f172a;
+}
+
+/* ===== PANEL PRINCIPAL ===== */
+#historicoPane {
     -fx-background-color: white;
     -fx-background-radius: 14;
     -fx-border-color: rgba(2,6,23,0.12);
@@ -16,15 +23,8 @@
     -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.06), 16, 0.25, 0, 4);
 }
 
-/* ===== Título ===== */
-#labelPrincipal {
-    -fx-font-size: 22px;
-    -fx-font-weight: 800;
-    -fx-text-fill: #0f172a;
-}
-
-/* ===== ListView ===== */
-#listHistorial {
+/* ===== LISTA ===== */
+#listHistorico {
     -fx-background-color: #ffffff;
     -fx-border-color: rgba(2,6,23,0.12);
     -fx-border-radius: 12;
@@ -33,25 +33,25 @@
     -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.04), 8, 0.25, 0, 2);
 }
 
-#listHistorial .list-cell {
+#listHistorico .list-cell {
     -fx-padding: 10;
     -fx-background-color: transparent;
     -fx-text-fill: #0f172a;
 }
 
-#listHistorial .list-cell:filled:selected,
-#listHistorial .list-cell:filled:selected:focused {
+#listHistorico .list-cell:filled:selected,
+#listHistorico .list-cell:filled:selected:focused {
     -fx-background-color: #298a80;
     -fx-text-fill: white;
     -fx-font-weight: 600;
 }
 
-#listHistorial .list-cell:hover {
+#listHistorico .list-cell:hover {
     -fx-background-color: rgba(41,138,128,0.10);
     -fx-cursor: hand;
 }
 
-/* ===== Panel detalle ===== */
+/* ===== PANEL DE DETALLE ===== */
 #detallePane {
     -fx-background-color: #ffffff;
     -fx-background-radius: 12;
@@ -67,7 +67,6 @@
     -fx-text-fill: #0f172a;
 }
 
-/* Texto del detalle */
 .detalle-valor {
     -fx-text-fill: #0f172a;
     -fx-font-weight: 600;
