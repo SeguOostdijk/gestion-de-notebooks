@@ -34,11 +34,11 @@
                         <Label layoutX="13.0" layoutY="14.0" text="N° de Referencia:" />
                         <Label fx:id="lblNroReferencia" layoutX="123.0" layoutY="14.0" prefHeight="20.0" prefWidth="141.0" styleClass="detalle-label" />
                         <Label layoutX="11.0" layoutY="42.0" text="Docente:" />
-                        <Label fx:id="lblDocente" layoutX="76.0" layoutY="42.0" prefHeight="20.0" prefWidth="224.0" styleClass="detalle-label" />
+                        <Label fx:id="lblDocente" layoutX="76.0" layoutY="42.0" prefHeight="20.0" prefWidth="242.0" styleClass="detalle-label" />
                         <Label layoutX="12.0" layoutY="70.0" text="Materia:" />
                         <Label fx:id="lblMateria" layoutX="76.0" layoutY="70.0" prefHeight="20.0" prefWidth="237.0" styleClass="detalle-label" />
-                        <Label layoutX="339.0" layoutY="14.0" text="Horario:" />
-                        <Label fx:id="lblHorario" layoutX="394.0" layoutY="14.0" prefHeight="20.0" prefWidth="108.0" styleClass="detalle-label" />
+                        <Label layoutX="339.0" layoutY="14.0" text="Turno:" />
+                        <Label fx:id="lblHorario" layoutX="384.0" layoutY="14.0" prefHeight="20.0" prefWidth="108.0" styleClass="detalle-label" />
                         <Label layoutX="339.0" layoutY="42.0" text="Aula:" />
                         <Label fx:id="lblAula" layoutX="376.0" layoutY="42.0" prefHeight="20.0" prefWidth="56.0" styleClass="detalle-label" />
                         <Label layoutX="11.0" layoutY="97.0" text="Equipos:" />
@@ -48,6 +48,9 @@
                   <Button fx:id="btnFinalizar" layoutX="91.0" layoutY="571.0" onAction="#gestionarDevolucion" text="Gestionar Devolucion" visible="false" />
                   <Button fx:id="btnCancelar" layoutX="341.0" layoutY="571.0" onAction="#cancelarSeleccion" text="Cancelar selección" visible="false" />
             </children>
+         <BorderPane.margin>
+            <Insets bottom="25.0" />
+         </BorderPane.margin>
         </Pane>
     </center>
    <top>

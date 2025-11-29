@@ -16,7 +16,7 @@
   -fx-border-radius: 14;
   -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.06), 16, 0.25, 0, 4);
 }
-#labelSubtitulo #labelSubtitulo2{
+#labelSubtitulo{
   -fx-text-fill: #64748b;
   -fx-font-size: 13.5px;
 }
@@ -24,7 +24,7 @@
   -fx-text-fill: #0f172a;
   -fx-font-weight: 700;
 }
-#labelNroRef {
+#labelNroRef, #labelNroRefPrest {
   -fx-font-weight: 700;
 }
 .combo-box {
@@ -104,10 +104,10 @@
   -fx-border-radius: 12;
   -fx-background-radius: 12;
   -fx-padding: 10 16;
-  -fx-font-weight: 600;
+  -fx-font-weight: 700;
 }
-#btnEliminar:hover { -fx-border-color: rgba(2,6,23,0.30); -fx-cursor: hand; }
-
+#btnEliminar:hover { -fx-border-color: rgba(2,6,23,0.30); -fx-cursor: hand; -fx-background-color:#9d1616}
+#btnAgregarManual:hover {-fx-cursor: hand}
 .list-view {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;

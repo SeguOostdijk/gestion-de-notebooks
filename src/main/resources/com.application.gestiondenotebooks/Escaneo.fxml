@@ -13,20 +13,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="900.0" stylesheets="@style/escanearEquiposStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.gestiondenotebooks.controller.EscaneoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="800.0" stylesheets="@style/escanearEquiposStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.gestiondenotebooks.controller.EscaneoController">
    <center>
-      <Pane fx:id="principalPaneNP" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" style="-fx-border-style: solid; -fx-border-radius: 14px;">
+      <Pane fx:id="principalPaneNP" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" style="-fx-border-style: solid; -fx-border-radius: 14px;">
          <children>
             <Label fx:id="labelNP" layoutX="32.0" layoutY="27.0" text="Nuevo Préstamo">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="labelSubtitulo" layoutX="32.0" layoutY="67.0" text="Complete los datos del préstamo y escanee los equipos en el aula administrativa" />
-            <Label fx:id="labelNroRef" layoutX="35.0" layoutY="100.0" text="Número de Referencia:" />
-            <Label fx:id="labelNroRefPrest" layoutX="190.0" layoutY="100.0" prefHeight="18.0" prefWidth="156.0" />
-            <Button fx:id="btnCancelar" layoutX="346.0" layoutY="626.0" mnemonicParsing="false" onAction="#cancelarSeleccion" text="Cancelar" visible="false" />
-            <Pane fx:id="escanearEquiposPane" layoutX="115.0" layoutY="152.0" prefHeight="33.0" prefWidth="370.0" style="-fx-background-color: white; -fx-border-style: solid; -fx-border-radius: 14px;">
+            <Label fx:id="labelNroRef" layoutX="32.0" layoutY="59.0" text="REF-" />
+            <Label fx:id="labelNroRefPrest" layoutX="65.0" layoutY="59.0" prefHeight="18.0" prefWidth="156.0" />
+            <Button fx:id="btnCancelar" layoutX="307.0" layoutY="571.0" mnemonicParsing="false" onAction="#cancelarSeleccion" text="Cancelar Selección" visible="false" />
+            <Pane fx:id="escanearEquiposPane" layoutX="111.0" layoutY="97.0" prefHeight="33.0" prefWidth="370.0" style="-fx-background-color: white; -fx-border-style: solid; -fx-border-radius: 14px;">
                <children>
                   <Label fx:id="labelEscanearEquipos" layoutX="123.0" layoutY="7.0" text="Escanear Equipos">
                      <font>
@@ -35,10 +34,10 @@
                   </Label>
                </children>
             </Pane>
-            <Label fx:id="labelSubtitulo2" layoutX="32.0" layoutY="220.0" text="Escanee el código QR de cada equipo o ingrese el ID manualmente" />
+            <Label fx:id="labelSubtitulo2" layoutX="31.0" layoutY="162.0" text="Escanee el código QR de cada equipo" />
             <HBox alignment="CENTER" layoutX="176.0" layoutY="262.0" prefWidth="200.0" />
-            <Label layoutX="31.0" layoutY="342.0" text="Ingreso manual" />
-            <HBox layoutX="32.0" layoutY="364.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="600.0">
+            <Label layoutX="32.0" layoutY="273.0" text="Ingreso manual" />
+            <HBox layoutX="26.0" layoutY="300.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="600.0">
                <children>
                   <ComboBox fx:id="cmbEquipos" prefWidth="150.0">
                      <HBox.margin>
@@ -65,28 +64,29 @@
                   </Pane>
                </children>
             </HBox>
-            <HBox layoutX="32.0" layoutY="419.0" prefHeight="15.0" prefWidth="200.0">
-               <children>
-                  <Label text="Equipos Registrados: " />
-                  <Label fx:id="labelContador" text="0">
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-            <ListView fx:id="listEquipos" layoutX="31.0" layoutY="451.0" maxHeight="-Infinity" prefHeight="144.0" prefWidth="531.0" />
-            <Button fx:id="btnCrearPrestamo" disable="true" layoutX="204.0" layoutY="626.0" mnemonicParsing="false" onAction="#crearPrestamoEquipos" text="Crear Préstamo e Imprimir" />
-            <Button fx:id="btnEliminar" layoutX="147.0" layoutY="626.0" mnemonicParsing="false" onAction="#eliminarEquipo" text="Eliminar equipo" visible="false" />
+            <HBox layoutX="32.0" layoutY="419.0" prefHeight="15.0" prefWidth="200.0" />
+            <ListView fx:id="listEquipos" layoutX="26.0" layoutY="398.0" maxHeight="-Infinity" prefHeight="144.0" prefWidth="531.0" />
+            <Button fx:id="btnCrearPrestamo" disable="true" layoutX="195.0" layoutY="571.0" mnemonicParsing="false" onAction="#crearPrestamoEquipos" text="Crear Préstamo e Imprimir" />
+            <Button fx:id="btnEliminar" layoutX="167.0" layoutY="571.0" mnemonicParsing="false" onAction="#eliminarEquipo" text="Eliminar " visible="false" />
             <Label fx:id="labelCampoOblig" layoutX="296.0" layoutY="410.0" text="*Campo obligatorio*" textFill="#d11414" visible="false" />
-            <TextField fx:id="txtScan" layoutX="213.0" layoutY="283.0" opacity="0.0" />
+            <TextField fx:id="txtScan" layoutX="212.0" layoutY="210.0" opacity="0.0" />
+            <ImageView fitHeight="60.0" fitWidth="100.0" layoutX="270.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icon/scan-qr-code.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="31.0" layoutY="361.0" text="Equipos Registrados: " />
+            <Label fx:id="labelContador" layoutX="161.0" layoutY="361.0" text="0" />
          </children>
+         <BorderPane.margin>
+            <Insets bottom="25.0" />
+         </BorderPane.margin>
       </Pane>
    </center>
    <top>
-      <Button fx:id="btnVolver" onAction="#volver" mnemonicParsing="false"  text="Volver" BorderPane.alignment="TOP_LEFT">
+      <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#volver" text="Volver" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
-            <Insets left="35.0" top="25.0" />
+            <Insets left="25.0" top="25.0" />
          </BorderPane.margin>
       </Button>
    </top>

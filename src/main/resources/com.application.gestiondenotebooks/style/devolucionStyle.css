@@ -12,7 +12,9 @@
   -fx-font-weight: 800;
   -fx-text-fill: #0f172a;
 }
-
+#labelNroRef, #labelNroRefPrest {
+  -fx-font-weight: 700;
+}
 /* ===== Panel principal ===== */
 #devolucionPane {
   -fx-background-color: white;
@@ -57,11 +59,21 @@
   -fx-padding: 14;
   -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.04), 10, 0.25, 0, 2);
 }
-
+#escanearEquiposPane{
+   -fx-background-color: white;
+  -fx-background-radius: 14;
+  -fx-border-color: rgba(2,6,23,0.12);
+  -fx-border-radius: 14;
+  -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.06), 16, 0.25, 0, 4);
+}
 #labelDetalleTitulo {
   -fx-font-size: 15px;
   -fx-font-weight: 700;
   -fx-text-fill: #0f172a;
+}
+#labelEscanearEquipos {
+  -fx-text-fill: #0f172a;
+  -fx-font-weight: 700;
 }
 
 .detalle-label {
@@ -79,30 +91,40 @@
   -fx-border-radius: 12;
   -fx-cursor: hand;
 }
+#btnVolver{
+  -fx-font-weight:600;
+}
 
 #btnFinalizarPrestamo, #btnVolverQR, #btnIngresoManual{
-  -fx-background-color: #298a80;
+  -fx-background-radius: 12;
+  -fx-padding: 10 16;
+  -fx-font-weight: 700;
+  -fx-background-color: #298a80;   /* primario celeste como la home */
   -fx-text-fill: white;
   -fx-border-color: transparent;
-  -fx-font-weight: 700;
-  -fx-border-radius: 12;
-  fx-background-radius: 12;
-  -fx-cursor: hand;
-  -fx-padding: 10 16;
   
 }
 /* Botón Finalizar préstamo */
-
+#btnFinalizarPrestamo:hover, #btnVolverQR:hover, #btnIngresoManual:hover   { -fx-background-color: #1c8277; -fx-cursor: hand;}
 #btnDevolverManual{
-  -fx-background-color: #298a80;
+  -fx-background-radius: 10;
+  -fx-padding: 4 8;
+  -fx-font-weight: 700;
+  -fx-background-color: #298a80;   /* primario celeste como la home */
   -fx-text-fill: white;
   -fx-border-color: transparent;
-  -fx-font-weight: 700;
-  -fx-border-radius: 12;
-  fx-background-radius: 10;
-  -fx-cursor: hand;
-  -fx-padding: 5 10 ;
 }
+#btnCancelarSeleccion{
+  -fx-background-color: transparent;       /* “ghost” */
+  -fx-text-fill: #0f172a;
+  -fx-border-color: rgba(2,6,23,0.18);
+  -fx-border-width: 1;
+  -fx-border-radius: 12;
+  -fx-background-radius: 12;
+  -fx-padding: 10 16;
+  -fx-font-weight: 600;
+}
+#btnCancelarSeleccion:hover { -fx-border-color: rgba(2,6,23,0.30); -fx-cursor: hand; }
 
 
 #btnFinalizarPrestamo:hover, #btnDevolverManual:hover, #btnVolverQR:hover, #btnIngresoManual:hover{
@@ -125,15 +147,6 @@
   -fx-text-fill: white;
   -fx-font-weight: 700;
 }
-#btnCancelarSeleccion {
-  -fx-background-color: transparent;
-  -fx-text-fill: #0f172a;
-  -fx-border-color: rgba(2,6,23,0.18);
-  -fx-border-width: 1;
-}
 
-#btnCancelarSeleccion:hover {
-  -fx-border-color: rgba(2,6,23,0.30);
-}
 
 

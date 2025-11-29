@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" stylesheets="@style/nuevoPrestamoStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.gestiondenotebooks.controller.OtroDocenteController">
    <center>
       <Pane fx:id="principalPaneNP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-border-style: solid; -fx-border-radius: 14px;" BorderPane.alignment="CENTER">
@@ -24,8 +23,8 @@
             <Label fx:id="labelNroRef" layoutX="165.0" layoutY="100.0" />
             <Label layoutX="42.0" layoutY="243.0" text="Apellido" />
             <Label layoutX="42.0" layoutY="300.0" text="DNI" />
-            <Button fx:id="btnGuardar" onAction="#guardarDocente" layoutX="199.0" layoutY="618.0" mnemonicParsing="false" text="Guardar" />
-            <Button fx:id="btnLimpiar" onAction="#limpiar" layoutX="386.0" layoutY="618.0" mnemonicParsing="false" text="Limpiar" />
+            <Button fx:id="btnGuardar" layoutX="199.0" layoutY="618.0" mnemonicParsing="false" onAction="#guardarDocente" text="Guardar" />
+            <Button fx:id="btnLimpiar" layoutX="386.0" layoutY="618.0" mnemonicParsing="false" onAction="#limpiar" text="Limpiar" />
             <Pane fx:id="datosPrestamoPane" layoutX="165.0" layoutY="120.0" prefHeight="33.0" prefWidth="370.0" style="-fx-background-color: white; -fx-border-style: solid; -fx-border-radius: 14px;">
                <children>
                   <Label fx:id="labelDatosPrestamo" layoutX="123.0" layoutY="7.0" text="Datos del docente">
@@ -43,26 +42,26 @@
             <Label layoutX="37.0" layoutY="350.0" text="Seleccione las materias que dicta el docente (opcional)" />
             <ComboBox fx:id="cmbMaterias" layoutX="442.0" layoutY="438.0" prefHeight="38.0" prefWidth="223.0" promptText="Materias" />
             <ListView fx:id="listaMaterias" layoutX="38.0" layoutY="387.0" prefHeight="200.0" prefWidth="386.0" />
-            <Button fx:id="btnAgregarMateria" onAction="#agregarMateria" layoutX="442.0" layoutY="387.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="81.0" text="Añadir">
+            <Button fx:id="btnAgregarMateria" layoutX="442.0" layoutY="387.0" mnemonicParsing="false" onAction="#agregarMateria" prefHeight="38.0" prefWidth="81.0" text="Añadir">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="btnEliminar" onAction="#eliminarMateria" layoutX="214.0" layoutY="618.0" mnemonicParsing="false" text="Eliminar" visible="false" />
-            <Button fx:id="btnCancelar" onAction="#cancelarSeleccion" layoutX="352.0" layoutY="618.0" mnemonicParsing="false" text="Cancelar Selección" visible="false" />
+            <Button fx:id="btnEliminar" layoutX="214.0" layoutY="618.0" mnemonicParsing="false" onAction="#eliminarMateria" text="Eliminar" visible="false" />
+            <Button fx:id="btnCancelar" layoutX="352.0" layoutY="618.0" mnemonicParsing="false" onAction="#cancelarSeleccion" text="Cancelar Selección" visible="false" />
             <Label fx:id="campoObligNombre" layoutX="421.0" layoutY="189.0" text="*Campo obligatorio*" textFill="#d11515" visible="false" />
             <Label fx:id="campoObligApellido" layoutX="421.0" layoutY="243.0" text="*Campo obligatorio*" textFill="#d11515" visible="false" />
             <Label fx:id="campoObligDNI" layoutX="421.0" layoutY="300.0" text="*Campo obligatorio*" textFill="#d11515" visible="false" />
          </children>
          <BorderPane.margin>
-            <Insets bottom="100.0" top="20.0" />
+            <Insets bottom="75.0" top="25.0" />
          </BorderPane.margin>
       </Pane>
    </center>
    <top>
-      <Button fx:id="btnVolver" onAction="#irANuevoPrestamo" mnemonicParsing="false"  text="Volver" BorderPane.alignment="TOP_LEFT">
+      <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#irANuevoPrestamo" text="Volver" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
-            <Insets left="30.0" top="30.0" />
+            <Insets left="25.0" top="25.0" />
          </BorderPane.margin>
       </Button>
    </top>

@@ -39,18 +39,18 @@
                </children>
             </Pane>
             <Label fx:id="labelCampoOblig" layoutX="137.0" layoutY="497.0" text="*Debe completar todos los campos para continuar*" textFill="#cf0d0d" visible="false" />
-            <Button fx:id="btnOtroDocente" onAction="#irANuevoDocente" layoutX="414.0" layoutY="239.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="132.0" text="+ (Otro Docente)" />
-            <Button fx:id="btnOtraMateria" onAction="#irANuevaMateria" layoutX="414.0" layoutY="338.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="132.0" text="+ (Otra Materia)" />
+            <Button fx:id="btnOtroDocente" layoutX="414.0" layoutY="239.0" mnemonicParsing="false" onAction="#irANuevoDocente" prefHeight="30.0" prefWidth="132.0" text="+ (Otro Docente)" />
+            <Button fx:id="btnOtraMateria" layoutX="414.0" layoutY="338.0" mnemonicParsing="false" onAction="#irANuevaMateria" prefHeight="30.0" prefWidth="132.0" text="+ (Otra Materia)" />
          </children>
          <BorderPane.margin>
-            <Insets bottom="100.0" top="20.0" />
+            <Insets bottom="75.0" top="25.0" />
          </BorderPane.margin>
       </Pane>
    </center>
    <top>
       <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#volverAlMenuPrincipal" text="Volver" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
-            <Insets left="30.0" top="30.0" />
+            <Insets left="25.0" top="25.0" />
          </BorderPane.margin>
       </Button>
    </top>

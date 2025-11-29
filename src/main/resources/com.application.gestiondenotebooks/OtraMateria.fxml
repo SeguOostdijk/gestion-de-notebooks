@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" stylesheets="@style/nuevoPrestamoStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.gestiondenotebooks.controller.OtraMateriaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" stylesheets="@style/nuevoPrestamoStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.gestiondenotebooks.controller.OtraMateriaController">
    <center>
       <Pane fx:id="principalPaneNP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="500.0" prefWidth="600.0" style="-fx-border-style: solid; -fx-border-radius: 14px;" BorderPane.alignment="CENTER">
          <children>
@@ -40,14 +40,14 @@
             <Label fx:id="labelCampoOblig" layoutX="63.0" layoutY="367.0" prefHeight="20.0" prefWidth="474.0" text="*Debe agregar un nombre y un plan (existente o nuevo) para poder continuar*" textFill="#d11515" visible="false" />
          </children>
          <BorderPane.margin>
-            <Insets bottom="100.0" top="20.0" />
+            <Insets bottom="75.0" top="25.0" />
          </BorderPane.margin>
       </Pane>
    </center>
    <top>
-      <Button fx:id="btnVolver" onAction="#irANuevoPrestamo" mnemonicParsing="false" text="Volver" BorderPane.alignment="TOP_LEFT">
+      <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#irANuevoPrestamo" text="Volver" BorderPane.alignment="TOP_LEFT">
          <BorderPane.margin>
-            <Insets left="30.0" top="30.0" />
+            <Insets left="25.0" top="25.0" />
          </BorderPane.margin>
       </Button>
    </top>

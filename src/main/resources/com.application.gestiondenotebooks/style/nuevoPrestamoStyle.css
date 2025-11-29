@@ -106,12 +106,12 @@
   -fx-border-radius: 12;
   -fx-background-radius: 12;
   -fx-padding: 10 16;
-  -fx-font-weight: 600;
+  -fx-font-weight: 700;
 }
-#btnEliminar:hover { -fx-border-color: rgba(2,6,23,0.30); -fx-cursor: hand; }
+#btnEliminar:hover { -fx-border-color: rgba(2,6,23,0.30); -fx-cursor: hand; -fx-background-color:#9d1616}
 
-#btnEscaneo:hover, #btnGuardar:hover   { -fx-background-color: #1c8277; -fx-cursor: hand;}
-#btnEscaneo:pressed, #btnGuardar:pressed { -fx-translate-y: 1; }
+#btnEscaneo:hover, #btnGuardar:hover, #btnAgregarMateria:hover   { -fx-background-color: #1c8277; -fx-cursor: hand;}
+#btnEscaneo:pressed, #btnGuardar:pressed, #btnAgregarMateria:pressed { -fx-translate-y: 1; }
 #btnOtroDocente:hover, #btnOtraMateria:hover{-fx-background-color: #1c8277; -fx-cursor: hand;}
 #btnOtroDocente:pressed, #btnOtraMateria:pressed {-fx-translate-y: 1;}
 #btnLimpiar{

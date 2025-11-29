@@ -49,7 +49,7 @@ public class DevolucionController implements Initializable {
     private PrestamoEquipoRepository prestamoEquipoRepo;
 
     @FXML
-    private Label lblNroRef, lblDocente, lblMateria, lblProblemasQR, lblDeshabilitarManual;
+    private Label lblProblemasQR, lblDeshabilitarManual, labelNroRef,labelNroRefPrest;
 
     @FXML
     private ListView<PrestamoEquipo> listEquipos;
@@ -108,8 +108,8 @@ public class DevolucionController implements Initializable {
         Optional<Equipo> equipoOpt = equipoRepo.findByCodigoQr(txtScan.getText());
 
         if (equipoOpt.isEmpty()) {
-            mostrarWarn("Error", "Código QR inválido",
-                    "No existe un equipo asociado al QR: " + codigo);
+            mostrarMensaje("Error", "Código QR inválido",
+                    "No existe un equipo asociado al QR: " + codigo, Alert.AlertType.WARNING);
             return;
         }
 
@@ -119,8 +119,8 @@ public class DevolucionController implements Initializable {
                 .anyMatch(e -> e.getEquipo().getId().equals(equipo.getId()));
 
         if (!pertenece) {
-            mostrarWarn("Error", "Equipo incorrecto",
-                    "El equipo escaneado no pertenece a este préstamo.");
+            mostrarMensaje("Error", "Equipo incorrecto",
+                    "El equipo escaneado no pertenece a este préstamo.", Alert.AlertType.WARNING);
             return;
         }
 
@@ -143,9 +143,7 @@ public class DevolucionController implements Initializable {
     }
 
     private void cargarDatos() {
-        lblNroRef.setText(prestamo.getNroReferencia());
-        lblDocente.setText(prestamo.getDocente().getNombre());
-        lblMateria.setText(prestamo.getMateria().getNombre());
+        labelNroRefPrest.setText(prestamo.getNroReferencia());
     }
 
     private void iniciarLista() {
@@ -189,12 +187,18 @@ public class DevolucionController implements Initializable {
 
         // ★ NUEVO: Fecha de cierre
         prestamo.setFechaFin(LocalDateTime.now());
-
         prestamoRepository.save(prestamo);
-
+        mostrarMensaje("Éxito","Docente registrado correctamente","", Alert.AlertType.INFORMATION);
         irAPrestamosActivos(e);
     }
 
+    private void mostrarMensaje(String titulo, String cabecera, String contenido, Alert.AlertType alertType) {
+        Alert a = new Alert(alertType);
+        a.setTitle(titulo);
+        a.setHeaderText(cabecera);
+        a.setContentText(contenido);
+        a.showAndWait();
+    }
     // =============================================================
     // NAVEGAR
     // =============================================================
@@ -215,8 +219,8 @@ public class DevolucionController implements Initializable {
 
         } catch (IOException ex) {
             ex.printStackTrace();
-            mostrarWarn("Error", "No se pudo cargar la pantalla.",
-                    "Intentelo nuevamente.");
+            mostrarMensaje("Error", "No se pudo cargar la pantalla.",
+                    "Intentelo nuevamente.", Alert.AlertType.WARNING);
         }
     }
 
@@ -253,18 +257,7 @@ public class DevolucionController implements Initializable {
             btnVolverQR.setVisible(true);
             lblDeshabilitarManual.setVisible(true);
         }
-
         btnCancelarSeleccion.setVisible(false);
     }
 
-    // =============================================================
-    // ALERTA
-    // =============================================================
-    private void mostrarWarn(String titulo, String cabecera, String contenido) {
-        Alert a = new Alert(Alert.AlertType.WARNING);
-        a.setTitle(titulo);
-        a.setHeaderText(cabecera);
-        a.setContentText(contenido);
-        a.showAndWait();
-    }
 }
