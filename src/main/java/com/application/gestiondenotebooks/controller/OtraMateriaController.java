@@ -111,6 +111,7 @@ public class OtraMateriaController implements Initializable {
             javafx.application.Platform.runLater(() -> {
                 Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
+                stage.setFullScreen(stage.isFullScreen());
                 stage.centerOnScreen();
                 stage.show();
             });

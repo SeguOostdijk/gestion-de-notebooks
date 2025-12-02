@@ -200,9 +200,14 @@ public class PrestamosActivosController implements Initializable {
     }
 
     // ============================================================
-    //                    VOLVER A PRINCIPAL
+    //                    VOLVER A PRINCIPAL (ACTUALIZADO EL ESTADO)
     // ============================================================
     public void irAVentanaPrincipal(javafx.event.ActionEvent e) throws IOException {
+
+        // 1. Obtener la Stage actual y su estado de pantalla completa
+        Stage actualStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        boolean estabaEnPantallaCompleta = actualStage.isFullScreen(); // Capturar estado
+
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/com.application.gestiondenotebooks/VentanaPrincipal.fxml")
         );
@@ -210,10 +215,14 @@ public class PrestamosActivosController implements Initializable {
 
         Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        stage.setTitle("Gestión de Notebooks CAECE");
-        stage.setScene(new Scene(root));
-        stage.centerOnScreen();
-        stage.show();
+        // 2. Reutilizar la Stage, establecer la nueva Scene
+        actualStage.setTitle("Gestión de Notebooks CAECE");
+        actualStage.setScene(new Scene(root));
+
+        // 3. Reaplicar el estado de pantalla completa
+        actualStage.setFullScreen(estabaEnPantallaCompleta); // Reaplicar estado
+
+        actualStage.centerOnScreen();
+        actualStage.show();
     }
 }

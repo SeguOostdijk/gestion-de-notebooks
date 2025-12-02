@@ -46,8 +46,6 @@ public class VentanaPrincipalController implements Initializable {
             mouseCountLabel.setText(disponibles.getOrDefault(TipoEquipo.MOUSE.name(), 0L).toString());
 
         } catch (Exception e) {
-            // El error "cannot be cast to java.lang.String" era capturado aquí,
-            // lo que hacía que se muestre "N/D"
             System.err.println("Error al cargar el conteo de equipos: " + e.getMessage());
             ntbCountLabel.setText("N/D");
             cgdCountLabel.setText("N/D");
@@ -56,39 +54,62 @@ public class VentanaPrincipalController implements Initializable {
     }
 
 
+    // ============================================================
+    //      NAVEGACIÓN A NUEVO PRÉSTAMO
+    // ============================================================
     public void irANuevoPrestamo(javafx.event.ActionEvent e) throws IOException {
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        boolean estabaEnPantallaCompleta = stage.isFullScreen(); // Capturar estado
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/NuevoPrestamo.fxml"));
         loader.setControllerFactory(context::getBean);
         Parent root = loader.load();
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+
         Scene scene = new Scene(root);
         stage.setTitle("Agregar Nuevo Préstamo");
         stage.setScene(scene);
+        stage.setFullScreen(estabaEnPantallaCompleta); // Reaplicar estado
         stage.centerOnScreen();
         stage.show();
     }
 
+    // ============================================================
+    //      NAVEGACIÓN A PRÉSTAMOS ACTIVOS
+    // ============================================================
     public void irAPrestamosActivos(javafx.event.ActionEvent e) throws IOException {
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        boolean estabaEnPantallaCompleta = stage.isFullScreen(); // Capturar estado
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/PrestamosActivos.fxml"));
         loader.setControllerFactory(context::getBean);
         Parent root = loader.load();
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+
         Scene scene = new Scene(root);
         stage.setTitle("Prestamos Activos");
         stage.setScene(scene);
+        stage.setFullScreen(estabaEnPantallaCompleta); // Reaplicar estado
         stage.centerOnScreen();
         stage.show();
     }
 
+    // ============================================================
+    //      NAVEGACIÓN A HISTÓRICO
+    // ============================================================
     public void irAHistorico(javafx.event.ActionEvent e) throws IOException {
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        boolean estabaEnPantallaCompleta = stage.isFullScreen(); // Capturar estado
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/Historico.fxml"));
         loader.setControllerFactory(context::getBean);
         Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
+        stage.setFullScreen(estabaEnPantallaCompleta); // Reaplicar estado
         stage.setTitle("Historial de Préstamos");
+        stage.centerOnScreen();
         stage.show();
     }
-
 }

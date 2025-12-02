@@ -79,12 +79,12 @@ public class HistoricoController implements Initializable {
                             return;
                         }
 
-                        String docente = item.getDocente() != null ? item.getDocente().getNombre() : "—";
+                        String docente = item.getDocente() != null ? item.getDocente().getNombre() + " " + item.getDocente().getApellido() : "—";
                         String materia = item.getMateria() != null ? item.getMateria().getNombre() : "—";
 
-                        setText("Ref: " + item.getNroReferencia()
-                                + "   | Docente: " + docente
-                                + "   | Materia: " + materia);
+                        setText("REF-" + item.getNroReferencia()
+                                + ";  " + docente
+                                + ";  " + materia);
                     }
                 };
             }
@@ -119,9 +119,13 @@ public class HistoricoController implements Initializable {
     }
 
     // ============================================================
-    //      VOLVER
+    //      VOLVER (IR A VENTANA PRINCIPAL)
     // ============================================================
     public void irAVentanaPrincipal(javafx.event.ActionEvent e) throws IOException {
+
+        // 1. Obtener la Stage actual y su estado de pantalla completa
+        Stage actualStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        boolean estabaEnPantallaCompleta = actualStage.isFullScreen(); // Capturar estado
 
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/com.application.gestiondenotebooks/VentanaPrincipal.fxml")
@@ -131,11 +135,14 @@ public class HistoricoController implements Initializable {
 
         Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        stage.setTitle("Gestión de Notebooks CAECE");
-        stage.setScene(new Scene(root));
-        stage.centerOnScreen();
-        stage.show();
+        // 2. Reutilizar la Stage, establecer la nueva Scene
+        actualStage.setTitle("Gestión de Notebooks CAECE");
+        actualStage.setScene(new Scene(root));
+
+        // 3. Reaplicar el estado de pantalla completa
+        actualStage.setFullScreen(estabaEnPantallaCompleta); // Reaplicar estado
+
+        actualStage.centerOnScreen();
+        actualStage.show();
     }
 }
-

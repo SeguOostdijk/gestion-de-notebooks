@@ -231,6 +231,7 @@ public class EscaneoController implements Initializable {
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setFullScreen(stage.isFullScreen());
             stage.centerOnScreen();
             stage.show();
         } catch (Exception ex) {

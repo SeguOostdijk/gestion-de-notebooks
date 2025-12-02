@@ -77,9 +77,11 @@ public class NuevoPrestamoController implements Initializable {
         Parent root = loader.load();
         // obtener el Stage actual desde el botón que disparó el evento
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        boolean estabaEnPantallaCompleta = stage.isFullScreen(); // Capturar estado
         stage.setTitle("Sistema de Gestión de Notebooks - CAECE");
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setFullScreen(estabaEnPantallaCompleta);
         stage.centerOnScreen();
         stage.show();
     }
@@ -99,6 +101,7 @@ public class NuevoPrestamoController implements Initializable {
             Scene scene = new Scene(root);
             stage.setTitle("Escanear equipos");
             stage.setScene(scene);
+            stage.setFullScreen(stage.isFullScreen());
             stage.centerOnScreen();
             stage.show();
         }
@@ -172,6 +175,7 @@ public class NuevoPrestamoController implements Initializable {
         Scene scene = new Scene(root);
         stage.setTitle("Agregar un nuevo docente");
         stage.setScene(scene);
+        stage.setFullScreen(stage.isFullScreen());
         stage.centerOnScreen();
         stage.show();
     }
@@ -186,6 +190,7 @@ public class NuevoPrestamoController implements Initializable {
         Scene scene = new Scene(root);
         stage.setTitle("Agregar una nueva materia");
         stage.setScene(scene);
+        stage.setFullScreen(stage.isFullScreen());
         stage.centerOnScreen();
         stage.show();
     }

@@ -188,7 +188,7 @@ public class DevolucionController implements Initializable {
         // ★ NUEVO: Fecha de cierre
         prestamo.setFechaFin(LocalDateTime.now());
         prestamoRepository.save(prestamo);
-        mostrarMensaje("Éxito","Docente registrado correctamente","", Alert.AlertType.INFORMATION);
+        mostrarMensaje("Éxito","Prestamo finalizado correctamente","", Alert.AlertType.INFORMATION);
         irAPrestamosActivos(e);
     }
 
@@ -214,6 +214,7 @@ public class DevolucionController implements Initializable {
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Préstamos Activos");
+            stage.setFullScreen(stage.isFullScreen());
             stage.centerOnScreen();
             stage.show();
 
