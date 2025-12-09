@@ -35,7 +35,7 @@ public class OtroDocenteController implements Initializable {
     private ListView<Materia> listaMaterias;
 
     @FXML
-    private Button btnGuardar, btnEliminar, btnCancelar, btnAgregarMateria, btnLimpiar;
+    private Button btnGuardar, btnEliminar, btnCancelar, btnLimpiar;
 
     @FXML
     private ComboBox<Materia> cmbMaterias;
@@ -189,10 +189,8 @@ public class OtroDocenteController implements Initializable {
 
             javafx.application.Platform.runLater(() -> {
                 Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.setFullScreen(stage.isFullScreen());
-                stage.centerOnScreen();
-                stage.show();
+                Scene scene = stage.getScene();
+                scene.setRoot(root);
             });
 
         } catch (IOException ex) {

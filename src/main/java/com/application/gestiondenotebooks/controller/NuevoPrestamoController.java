@@ -62,8 +62,6 @@ public class NuevoPrestamoController implements Initializable {
     private ComboBox<Docente> cmbDocente;
     @FXML
     private Label labelCampoOblig;
-    @Autowired
-    private PrestamoRepository prestamoRepository;
     private String nroReferencia;
 
 
@@ -73,17 +71,12 @@ public class NuevoPrestamoController implements Initializable {
     }
     public void volverAlMenuPrincipal(javafx.event.ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/VentanaPrincipal.fxml"));
-        loader.setControllerFactory(context::getBean);  // <-- para que Spring cree el controller
+        loader.setControllerFactory(context::getBean);
         Parent root = loader.load();
-        // obtener el Stage actual desde el botón que disparó el evento
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        boolean estabaEnPantallaCompleta = stage.isFullScreen(); // Capturar estado
         stage.setTitle("Sistema de Gestión de Notebooks - CAECE");
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setFullScreen(estabaEnPantallaCompleta);
-        stage.centerOnScreen();
-        stage.show();
+        Scene scene = stage.getScene();
+        scene.setRoot(root);
     }
 
     public void irAEscaneo(javafx.event.ActionEvent e) throws Exception{
@@ -92,18 +85,14 @@ public class NuevoPrestamoController implements Initializable {
         else {
             crearPrestamo();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/Escaneo.fxml"));
-            loader.setControllerFactory(context::getBean);  // <-- para que Spring cree el controller
+            loader.setControllerFactory(context::getBean);
             Parent root = loader.load();
             EscaneoController esc = loader.getController();
             esc.init(nroReferencia);
-            // obtener el Stage actual desde el botón que disparó el evento
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
             stage.setTitle("Escanear equipos");
-            stage.setScene(scene);
-            stage.setFullScreen(stage.isFullScreen());
-            stage.centerOnScreen();
-            stage.show();
+            Scene scene = stage.getScene();
+            scene.setRoot(root);
         }
     }
     public boolean hayCamposIncompletos() {
@@ -168,31 +157,23 @@ public class NuevoPrestamoController implements Initializable {
     @FXML
     private void irANuevoDocente(javafx.event.ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/OtroDocente.fxml"));
-        loader.setControllerFactory(context::getBean);  // <-- para que Spring cree el controller
+        loader.setControllerFactory(context::getBean);
         Parent root = loader.load();
-        // obtener el Stage actual desde el botón que disparó el evento
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
         stage.setTitle("Agregar un nuevo docente");
-        stage.setScene(scene);
-        stage.setFullScreen(stage.isFullScreen());
-        stage.centerOnScreen();
-        stage.show();
+        Scene scene = stage.getScene();
+        scene.setRoot(root);
     }
 
     @FXML
     private void irANuevaMateria(javafx.event.ActionEvent e) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/OtraMateria.fxml"));
-        loader.setControllerFactory(context::getBean);  // <-- para que Spring cree el controller
+        loader.setControllerFactory(context::getBean);
         Parent root = loader.load();
-        // obtener el Stage actual desde el botón que disparó el evento
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
         stage.setTitle("Agregar una nueva materia");
-        stage.setScene(scene);
-        stage.setFullScreen(stage.isFullScreen());
-        stage.centerOnScreen();
-        stage.show();
+        Scene scene = stage.getScene();
+        scene.setRoot(root);
     }
     public void setDocenteCmb(Docente nuevoDocente) {
         cmbDocente.getSelectionModel().select(nuevoDocente);

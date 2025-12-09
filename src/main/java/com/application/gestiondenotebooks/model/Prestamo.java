@@ -19,8 +19,23 @@ import java.util.stream.Collectors;
         name = "prestamo",
         uniqueConstraints = @UniqueConstraint(name = "uq_prestamo_nro_referencia", columnNames = "nro_referencia")
 )
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+
 public class Prestamo {
+    public Prestamo() {
+    }
+
+    public Prestamo(Long id, String nroReferencia, Materia materia, Docente docente, LocalDate fecha, Turno turno, LocalDateTime fechaFin, Aula aula, EstadoPrestamo estado, List<PrestamoEquipo> equipos) {
+        this.id = id;
+        this.nroReferencia = nroReferencia;
+        this.materia = materia;
+        this.docente = docente;
+        this.fecha = fecha;
+        this.turno = turno;
+        this.fechaFin = fechaFin;
+        this.aula = aula;
+        this.estado = estado;
+        this.equipos = equipos;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,6 +88,86 @@ public class Prestamo {
         return conteo.entrySet().stream()
                 .map(e -> e.getValue() + " " + e.getKey() + (e.getValue() > 1 ? "S" : ""))
                 .collect(Collectors.joining(", "));
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
+
+    public String getNroReferencia() {
+        return nroReferencia;
+    }
+
+    public void setNroReferencia(String nroReferencia) {
+        this.nroReferencia = nroReferencia;
+    }
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
+
+    public LocalDateTime getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDateTime fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public EstadoPrestamo getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPrestamo estado) {
+        this.estado = estado;
+    }
+
+    public Aula getAula() {
+        return aula;
+    }
+
+    public void setAula(Aula aula) {
+        this.aula = aula;
+    }
+
+    public List<PrestamoEquipo> getEquipos() {
+        return equipos;
+    }
+
+    public void setEquipos(List<PrestamoEquipo> equipos) {
+        this.equipos = equipos;
     }
 
     @Override

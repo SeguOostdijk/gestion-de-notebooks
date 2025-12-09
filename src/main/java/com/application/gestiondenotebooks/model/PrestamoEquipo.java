@@ -12,7 +12,7 @@ import lombok.*;
                 columnNames = {"prestamo_id", "equipo_id"}
         )
 )
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+
 public class PrestamoEquipo {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +41,45 @@ public class PrestamoEquipo {
         return "Equipo " + equipo.getNroEquipo() + " - " + equipo.getTipo() + " (" + estadoDevolucion + ")";
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public PrestamoEquipo(Long id, Prestamo prestamo, Equipo equipo, EstadoDevolucion estadoDevolucion) {
+        this.id = id;
+        this.prestamo = prestamo;
+        this.equipo = equipo;
+        this.estadoDevolucion = estadoDevolucion;
+    }
 
+    public PrestamoEquipo() {
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
+
+    public Prestamo getPrestamo() {
+        return prestamo;
+    }
+
+    public void setPrestamo(Prestamo prestamo) {
+        this.prestamo = prestamo;
+    }
+
+    public EstadoDevolucion getEstadoDevolucion() {
+        return estadoDevolucion;
+    }
+
+    public void setEstadoDevolucion(EstadoDevolucion estadoDevolucion) {
+        this.estadoDevolucion = estadoDevolucion;
+    }
 }

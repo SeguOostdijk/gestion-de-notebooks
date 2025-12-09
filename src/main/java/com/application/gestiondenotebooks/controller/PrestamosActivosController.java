@@ -78,9 +78,7 @@ public class PrestamosActivosController implements Initializable {
         btnCancelar.setVisible(false);
     }
 
-    // ============================================================
-    //      CELL FACTORY PARA LISTA COMPACTA
-    // ============================================================
+
     private void configurarListaCompacta() {
 
         listPrestamos.setCellFactory(new Callback<ListView<Prestamo>, ListCell<Prestamo>>() {
@@ -110,78 +108,51 @@ public class PrestamosActivosController implements Initializable {
         });
     }
 
-    // ============================================================
-    //                   CARGAR PRÉSTAMOS
-    // ============================================================
     private void cargarPrestamos() {
         EstadoPrestamo estado = EstadoPrestamo.ABIERTO;
         List<Prestamo> activos = prestamoRepository.findByEstado(estado);
         listPrestamos.setItems(FXCollections.observableArrayList(activos));
     }
 
-    // ============================================================
-    //                   MOSTRAR DETALLE
-    // ============================================================
     private void mostrarDetallePrestamo(Prestamo p) {
 
         lblNroReferencia.setText(
                 p.getNroReferencia() != null ? p.getNroReferencia() : "—"
         );
-
         lblDocente.setText(
                 p.getDocente() != null ? p.getDocente().getNombre() : "—"
         );
-
         lblMateria.setText(
                 p.getMateria() != null ? p.getMateria().getNombre() : "—"
         );
-
         lblHorario.setText(
                 p.getTurno() != null ? p.getTurno().name() : "—"
         );
-
         lblAula.setText(
                 p.getAula() != null ? p.getAula().getCodigo_aula() : "—"
         );
-
         lblEquiposDetalle.setText(
                 p.getResumenEquipos() != null ? p.getResumenEquipos() : "—"
         );
     }
 
-    // ============================================================
-    //                   GESTIONAR DEVOLUCIÓN
-    // ============================================================
     @FXML
     private void gestionarDevolucion(javafx.event.ActionEvent e) throws IOException {
-
         if (prestamoSeleccionado != null) {
-
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com.application.gestiondenotebooks/Devolucion.fxml")
             );
             loader.setControllerFactory(context::getBean);
-
             Parent root = loader.load();
-
             DevolucionController controller = loader.getController();
             controller.setPrestamo(prestamoSeleccionado);
-
-            Stage stage = new Stage();
+            Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             stage.setTitle("Devolución - Ref: " + prestamoSeleccionado.getNroReferencia());
-            stage.setScene(new Scene(root));
-            stage.centerOnScreen();
-            stage.show();
-
-            // Cerrar ventana actual
-            Stage actual = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            actual.close();
+            Scene scene = stage.getScene();
+            scene.setRoot(root);
         }
     }
 
-    // ============================================================
-    //                   CANCELAR SELECCIÓN
-    // ============================================================
     @FXML
     private void cancelarSeleccion() {
         limpiarDetalle();
@@ -199,30 +170,17 @@ public class PrestamosActivosController implements Initializable {
         listPrestamos.getSelectionModel().clearSelection();
     }
 
-    // ============================================================
-    //                    VOLVER A PRINCIPAL (ACTUALIZADO EL ESTADO)
-    // ============================================================
     public void irAVentanaPrincipal(javafx.event.ActionEvent e) throws IOException {
 
-        // 1. Obtener la Stage actual y su estado de pantalla completa
         Stage actualStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        boolean estabaEnPantallaCompleta = actualStage.isFullScreen(); // Capturar estado
-
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/com.application.gestiondenotebooks/VentanaPrincipal.fxml")
         );
         loader.setControllerFactory(context::getBean);
-
         Parent root = loader.load();
+        actualStage.setTitle("Sistema de Gestión de Notebooks - CAECE");
+        Scene scene = actualStage.getScene();
 
-        // 2. Reutilizar la Stage, establecer la nueva Scene
-        actualStage.setTitle("Gestión de Notebooks CAECE");
-        actualStage.setScene(new Scene(root));
-
-        // 3. Reaplicar el estado de pantalla completa
-        actualStage.setFullScreen(estabaEnPantallaCompleta); // Reaplicar estado
-
-        actualStage.centerOnScreen();
-        actualStage.show();
+        scene.setRoot(root);
     }
 }

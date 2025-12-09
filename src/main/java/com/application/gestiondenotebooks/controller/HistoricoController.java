@@ -59,9 +59,6 @@ public class HistoricoController implements Initializable {
                 });
     }
 
-    // ============================================================
-    //      LISTA COMPACTA
-    // ============================================================
     private void configurarListaCompacta() {
 
         listHistorico.setCellFactory(new Callback<ListView<Prestamo>, ListCell<Prestamo>>() {
@@ -91,9 +88,6 @@ public class HistoricoController implements Initializable {
         });
     }
 
-    // ============================================================
-    //      CARGAR HISTORIAL
-    // ============================================================
     private void cargarHistorial() {
         List<Prestamo> cerrados =
                 prestamoRepository.findByEstadoOrderByFechaFinDesc(EstadoPrestamo.CERRADO);
@@ -101,11 +95,7 @@ public class HistoricoController implements Initializable {
         listHistorico.setItems(FXCollections.observableArrayList(cerrados));
     }
 
-    // ============================================================
-    //          MOSTRAR DETALLE
-    // ============================================================
     private void mostrarDetalle(Prestamo p) {
-
         lblNroReferencia.setText(p.getNroReferencia());
         lblDocente.setText(p.getDocente().getNombre());
         lblMateria.setText(p.getMateria().getNombre());
@@ -118,31 +108,15 @@ public class HistoricoController implements Initializable {
         );
     }
 
-    // ============================================================
-    //      VOLVER (IR A VENTANA PRINCIPAL)
-    // ============================================================
     public void irAVentanaPrincipal(javafx.event.ActionEvent e) throws IOException {
-
-        // 1. Obtener la Stage actual y su estado de pantalla completa
-        Stage actualStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        boolean estabaEnPantallaCompleta = actualStage.isFullScreen(); // Capturar estado
-
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/com.application.gestiondenotebooks/VentanaPrincipal.fxml")
         );
-
         loader.setControllerFactory(context::getBean);
-
         Parent root = loader.load();
-
-        // 2. Reutilizar la Stage, establecer la nueva Scene
-        actualStage.setTitle("Gestión de Notebooks CAECE");
-        actualStage.setScene(new Scene(root));
-
-        // 3. Reaplicar el estado de pantalla completa
-        actualStage.setFullScreen(estabaEnPantallaCompleta); // Reaplicar estado
-
-        actualStage.centerOnScreen();
-        actualStage.show();
+        Scene scene = stage.getScene();
+        stage.setTitle("Sistema de Gestión de Notebooks - CAECE");
+        scene.setRoot(root);
     }
 }

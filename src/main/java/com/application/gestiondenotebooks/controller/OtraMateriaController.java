@@ -28,8 +28,6 @@ public class OtraMateriaController implements Initializable {
     @FXML
     private TextField txtNombre, txtOtroPlan;
     @FXML
-    private Button btnGuardar,btnLimpiar;
-    @FXML
     private Label labelCampoOblig;
     private Materia nuevaMateria;
 
@@ -110,10 +108,8 @@ public class OtraMateriaController implements Initializable {
 
             javafx.application.Platform.runLater(() -> {
                 Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.setFullScreen(stage.isFullScreen());
-                stage.centerOnScreen();
-                stage.show();
+                Scene scene = stage.getScene();
+                scene.setRoot(root);
             });
 
         } catch (IOException ex) {

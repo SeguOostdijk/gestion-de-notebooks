@@ -53,63 +53,36 @@ public class VentanaPrincipalController implements Initializable {
         }
     }
 
-
-    // ============================================================
-    //      NAVEGACIÓN A NUEVO PRÉSTAMO
-    // ============================================================
     public void irANuevoPrestamo(javafx.event.ActionEvent e) throws IOException {
 
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        boolean estabaEnPantallaCompleta = stage.isFullScreen(); // Capturar estado
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/NuevoPrestamo.fxml"));
         loader.setControllerFactory(context::getBean);
         Parent root = loader.load();
 
-        Scene scene = new Scene(root);
+        Scene scene = stage.getScene();
+
+        scene.setRoot(root);
         stage.setTitle("Agregar Nuevo Préstamo");
-        stage.setScene(scene);
-        stage.setFullScreen(estabaEnPantallaCompleta); // Reaplicar estado
-        stage.centerOnScreen();
-        stage.show();
     }
 
-    // ============================================================
-    //      NAVEGACIÓN A PRÉSTAMOS ACTIVOS
-    // ============================================================
     public void irAPrestamosActivos(javafx.event.ActionEvent e) throws IOException {
-
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        boolean estabaEnPantallaCompleta = stage.isFullScreen(); // Capturar estado
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/PrestamosActivos.fxml"));
         loader.setControllerFactory(context::getBean);
         Parent root = loader.load();
-
-        Scene scene = new Scene(root);
         stage.setTitle("Prestamos Activos");
-        stage.setScene(scene);
-        stage.setFullScreen(estabaEnPantallaCompleta); // Reaplicar estado
-        stage.centerOnScreen();
-        stage.show();
+        Scene scene = stage.getScene();
+        scene.setRoot(root);
     }
 
-    // ============================================================
-    //      NAVEGACIÓN A HISTÓRICO
-    // ============================================================
     public void irAHistorico(javafx.event.ActionEvent e) throws IOException {
-
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        boolean estabaEnPantallaCompleta = stage.isFullScreen(); // Capturar estado
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/Historico.fxml"));
         loader.setControllerFactory(context::getBean);
         Parent root = loader.load();
-
-        stage.setScene(new Scene(root));
-        stage.setFullScreen(estabaEnPantallaCompleta); // Reaplicar estado
+        Scene scene = stage.getScene();
+        scene.setRoot(root);
         stage.setTitle("Historial de Préstamos");
-        stage.centerOnScreen();
-        stage.show();
     }
 }

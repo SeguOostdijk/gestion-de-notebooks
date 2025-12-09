@@ -12,7 +12,6 @@ import com.application.gestiondenotebooks.repository.PrestamoEquipoRepository;
 import com.application.gestiondenotebooks.repository.PrestamoRepository;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,10 +37,7 @@ import java.util.ResourceBundle;
 
 @Component
 public class EscaneoController implements Initializable {
-    @Autowired
-    private EquipoRepository repository;
-    @Autowired
-    private ApplicationContext context;
+
 
     private Equipo equipoSeleccionado;
     private Long id;
@@ -68,6 +64,9 @@ public class EscaneoController implements Initializable {
     private TextField txtScan;
 
     @Autowired
+    private ApplicationContext context;
+
+    @Autowired
     private EquipoRepository equipoRepo;
 
     @Autowired
@@ -88,10 +87,10 @@ public class EscaneoController implements Initializable {
             String codigo = raw == null ? "" : raw.replace("\r","").replace("\n","").trim();
 
             if (!codigo.isEmpty()) {
-                manejarCodigoEscaneado(codigo); // <-- TU lógica
+                manejarCodigoEscaneado(codigo);
             }
             txtScan.clear();
-            txtScan.requestFocus(); // listo para el próximo
+            txtScan.requestFocus();
         });
         actualizarLista();
         configurarCMB();
@@ -125,7 +124,7 @@ public class EscaneoController implements Initializable {
     }
 
     public void init(String nroReferencia) {
-        this.idReferencia = prestamoRepo.findIdByNroReferencia(nroReferencia).get();/* cargar datos, etc. */
+        this.idReferencia = prestamoRepo.findIdByNroReferencia(nroReferencia).get();
         labelNroRefPrest.setText(nroReferencia);
     }
 
@@ -189,7 +188,7 @@ public class EscaneoController implements Initializable {
     }
     @FXML
     private void crearPrestamoEquipos(javafx.event.ActionEvent e){
-        List<Integer> listaNotebooks = new ArrayList<>();  //Para coleccionar los nro. de notebooks de la lista de impresion
+        List<Integer> listaNotebooks = new ArrayList<>();
         Prestamo prestamoActual=prestamoRepo.findDetalleById(idReferencia)
                 .orElseThrow(() -> new IllegalArgumentException("Préstamo no existe"));
         for (int i=0;i<listEquipos.getItems().size();i++){
@@ -229,11 +228,8 @@ public class EscaneoController implements Initializable {
             Parent root = loader.load();
             // obtener el Stage actual desde el botón que disparó el evento
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setFullScreen(stage.isFullScreen());
-            stage.centerOnScreen();
-            stage.show();
+            Scene scene = stage.getScene();        // reutilizás la misma escena
+            scene.setRoot(root);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -242,38 +238,27 @@ public class EscaneoController implements Initializable {
 
     @FXML
     private void volver(javafx.event.ActionEvent e) {
-        // 1. Armo el alert de confirmación
         ButtonType btnAceptar  = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
         ButtonType btnCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "¿Desea cancelar el préstamo actual?",
                 btnAceptar, btnCancelar);
-
         alert.setTitle("Cancelar préstamo");
         alert.setHeaderText("¿Cancelar el préstamo?");
-
         Optional<ButtonType> resultado = alert.showAndWait();
-
-        // 2. Si Aceptar → cancelo y vuelvo
         if (resultado.isPresent() && resultado.get() == btnAceptar) {
            prestamoRepo.deleteById(idReferencia);
-            // volver a la pantalla anterior
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com.application.gestiondenotebooks/NuevoPrestamo.fxml"));
-                loader.setControllerFactory(context::getBean);  // <-- para que Spring cree el controller
+                loader.setControllerFactory(context::getBean);
                 Parent root = loader.load();
-                // obtener el Stage actual desde el botón que disparó el evento
                 Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.centerOnScreen();
-                stage.show();
+                Scene scene = stage.getScene();
+                scene.setRoot(root);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-        // 3. Si Cancelar → no hago nada (se queda en la pantalla)
     }
 }
 

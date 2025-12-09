@@ -8,12 +8,17 @@ import lombok.*;
 @Table(
         name = "materia"
 )
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
+
 public class Materia {
+    public Materia(Long id, String planId, String nombre) {
+        this.id = id;
+        this.planId = planId;
+        this.nombre = nombre;
+    }
+
+    public Materia() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +29,30 @@ public class Materia {
 
     @Column(name="nombre", nullable=false, length=200)
     private String nombre;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(String planId) {
+        this.planId = planId;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     @Override
     public String toString() {

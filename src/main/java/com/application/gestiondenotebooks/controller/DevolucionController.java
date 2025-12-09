@@ -29,7 +29,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -49,24 +48,20 @@ public class DevolucionController implements Initializable {
     private PrestamoEquipoRepository prestamoEquipoRepo;
 
     @FXML
-    private Label lblProblemasQR, lblDeshabilitarManual, labelNroRef,labelNroRefPrest;
+    private Label lblProblemasQR, lblDeshabilitarManual,labelNroRefPrest;
 
     @FXML
     private ListView<PrestamoEquipo> listEquipos;
 
     @FXML
     private TextField txtScan;
-
     @FXML
-    private Button btnVolver, btnFinalizarPrestamo, btnIngresoManual,
+    private Button btnFinalizarPrestamo, btnIngresoManual,
             btnDevolverManual, btnVolverQR, btnCancelarSeleccion;
 
     private Prestamo prestamo;
     private PrestamoEquipo equipoSeleccionado;
 
-    // =============================================================
-    // INITIALIZE
-    // =============================================================
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -100,9 +95,6 @@ public class DevolucionController implements Initializable {
                 });
     }
 
-    // =============================================================
-    // MANEJAR QR
-    // =============================================================
     @FXML
     private void manejarCodigoEscaneado(String codigo) {
         Optional<Equipo> equipoOpt = equipoRepo.findByCodigoQr(txtScan.getText());
@@ -133,9 +125,7 @@ public class DevolucionController implements Initializable {
         actualizarLista();
     }
 
-    // =============================================================
-    // CARGAR DATOS
-    // =============================================================
+
     public void setPrestamo(Prestamo prestamo) {
         this.prestamo = prestamo;
         cargarDatos();
@@ -150,9 +140,7 @@ public class DevolucionController implements Initializable {
         listEquipos.setItems(FXCollections.observableArrayList(prestamo.getEquipos()));
     }
 
-    // =============================================================
-    // DEVOLUCIÓN MANUAL
-    // =============================================================
+
     @FXML
     private void devolverEquipoManual() {
         equipoSeleccionado.setEstadoDevolucion(EstadoDevolucion.DEVUELTO);
@@ -177,9 +165,7 @@ public class DevolucionController implements Initializable {
         }
     }
 
-    // =============================================================
-    // FINALIZAR PRÉSTAMO (ACTUALIZADO)
-    // =============================================================
+
     @FXML
     private void finalizarPrestamo(ActionEvent e) {
 
@@ -199,9 +185,7 @@ public class DevolucionController implements Initializable {
         a.setContentText(contenido);
         a.showAndWait();
     }
-    // =============================================================
-    // NAVEGAR
-    // =============================================================
+
     @FXML
     public void irAPrestamosActivos(ActionEvent e) {
         try {
@@ -212,12 +196,10 @@ public class DevolucionController implements Initializable {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
             stage.setTitle("Préstamos Activos");
-            stage.setFullScreen(stage.isFullScreen());
-            stage.centerOnScreen();
-            stage.show();
+            Scene scene = stage.getScene();        // reutilizás la misma escena
 
+            scene.setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
             mostrarMensaje("Error", "No se pudo cargar la pantalla.",
@@ -225,9 +207,7 @@ public class DevolucionController implements Initializable {
         }
     }
 
-    // =============================================================
-    // MANUAL / QR
-    // =============================================================
+
     @FXML
     private void cambiarAIngresoManual(ActionEvent e) {
         lblProblemasQR.setVisible(false);

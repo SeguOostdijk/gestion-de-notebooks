@@ -12,10 +12,19 @@ import lombok.*;
                 @UniqueConstraint(name = "uq_equipo_qr", columnNames = "codigo_qr")
         }
 )
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Equipo {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public Equipo(Long id, int nroEquipo, TipoEquipo tipo, String codigoQr) {
+        this.id = id;
+        this.nroEquipo = nroEquipo;
+        this.tipo = tipo;
+        this.codigoQr = codigoQr;
+    }
+
+    public Equipo() {
+    }
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false, length = 20)
@@ -31,5 +40,37 @@ public class Equipo {
     public String toString() {
         return "Tipo: " + tipo +
                 ", Numero de equipo: " + nroEquipo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public TipoEquipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoEquipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getNroEquipo() {
+        return nroEquipo;
+    }
+
+    public void setNroEquipo(int nroEquipo) {
+        this.nroEquipo = nroEquipo;
+    }
+
+    public String getCodigoQr() {
+        return codigoQr;
+    }
+
+    public void setCodigoQr(String codigoQr) {
+        this.codigoQr = codigoQr;
     }
 }
