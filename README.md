@@ -43,38 +43,6 @@ Flujo principal de pantallas:
 - iText 7 (generacion de PDF)
 - Maven
 
-## Requisitos
-
-- JDK 17
-- Maven (o usar `mvnw`/`mvnw.cmd`)
-- MySQL en ejecucion
-
-
-Ejemplo de preparacion minima en MySQL:
-
-
-## Ejecutar la aplicacion
-
-Desde la raiz del proyecto (`gestiondenotebooks`):
-
-### Opcion 1: ejecutar en desarrollo (JavaFX)
-
-```powershell
-.\mvnw.cmd clean javafx:run
-```
-
-### Opcion 2: empaquetar JAR
-
-```powershell
-.\mvnw.cmd clean package
-```
-
-Luego:
-
-```powershell
-java -jar target\gestiondenotebooks-0.0.1-SNAPSHOT.jar
-```
-
 ## Estructura del proyecto
 
 ```text
